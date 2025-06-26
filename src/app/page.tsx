@@ -108,6 +108,23 @@ const projects = [
     link: "#",
   },
   {
+  name: "QR Code Generator",
+  description: "A responsive and lightweight QR Code generator built with React and Tailwind CSS. Users can dynamically generate QR codes that embed certificate details, owner information, and company data for instant digital verification.",
+  tech: "React, Tailwind CSS, TypeScript, QRCode.react, html2canvas",
+  image: "/projects/qrcode.png", // Replace with actual image
+  link: "https://github.com/Nandita2002/Student_Sync/tree/main/qr-code-generator",
+  live: "https://qr-code-generator-chi-mauve.vercel.app/"
+},
+{
+  name: "E-Certificate Generator",
+  description: "A full-fledged MERN stack-based certificate generation system that allows admin and students to customize and generate e-certificates. Includes digital signatures, QR code verification, PDF download, and real-time input fields for professional document issuance.",
+  tech: "MongoDB, Express.js, React, Node.js, Tailwind CSS, jsPDF, html2canvas",
+  image: "/projects/certificate.png", // Replace with actual image
+  link: "https://github.com/Nandita2002/Student_Sync/tree/main/certificate-generator",
+  live: "https://certificate-generator-two-pi.vercel.app/"
+},
+
+  {
     name: "Student Management System",
     description: "Comprehensive MERN stack based student information system.",
     tech: "MongoDB, Express.js, React, Node.js, Tailwind",
