@@ -1,199 +1,134 @@
 'use client';
 
 import Image from 'next/image';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaInstagram } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-tr from-[#050505] via-[#111827] to-[#0f172a] text-white font-sans scroll-smooth">
-      {/* HERO SECTION */}
-      <section className="flex flex-col md:flex-row items-center justify-center py-24 px-8 gap-16 relative overflow-hidden">
-        {/* Background Glow */}
-        <div className="absolute inset-0 -z-10">
-          <div className="w-[600px] h-[600px] bg-pink-500/30 rounded-full blur-[120px] absolute -top-20 -left-32 animate-pulse" />
-          <div className="w-[500px] h-[500px] bg-green-400/20 rounded-full blur-[100px] absolute bottom-0 right-0 animate-pulse" />
-        </div>
+    <main className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-purple-950 text-white flex flex-col items-center px-6 py-12 space-y-20">
+      {/* Profile Section */}
+      <motion.section
+        className="flex flex-col items-center text-center space-y-6"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <Image
+          src="/profilepic.jpg"
+          alt="Profile"
+          width={150}
+          height={150}
+          className="rounded-full border-4 border-purple-500 shadow-lg"
+        />
+        <h1 className="text-4xl font-bold">Nandita Mahesh</h1>
+        <p className="text-lg text-purple-200 max-w-2xl">
+          Associate Software Developer & Delivery Manager | Passionate about building scalable web applications,
+          technology-driven solutions, and impactful digital products.
+        </p>
 
-        {/* LEFT SIDE */}
-        <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9 }}
-          className="flex-1 text-center md:text-left bg-white/5 backdrop-blur-lg p-10 rounded-2xl border border-white/10 shadow-[0_0_20px_rgba(255,0,150,0.3)]"
-        >
-          <h1 className="text-6xl font-extrabold tracking-tight bg-gradient-to-r from-pink-400 via-yellow-300 to-green-400 bg-clip-text text-transparent drop-shadow-lg mb-6">
-            Hi, I’m Nandita Mahesh
-          </h1>
-          <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-            <span className="text-green-400 font-semibold">Software Developer 🚀</span>
-            <br /> Building futuristic, scalable digital products 🔮
-            <br /> Turning <span className="text-pink-300">caffeine ☕</span> into <span className="text-yellow-300">code 💻</span>
-          </p>
-
-          <div className="flex gap-6 justify-center md:justify-start mb-8">
-            <SocialIcons />
-          </div>
-
-          <a
-            href="https://drive.google.com/uc?export=download&id=1YjzfHJwUeSBWkj3tTvXEl1yQRo1CqexT"
-            className="inline-block bg-gradient-to-r from-pink-500 to-purple-500 text-white px-8 py-3 rounded-full hover:opacity-90 transition font-semibold shadow-[0_0_15px_rgba(236,72,153,0.6)]"
-          >
-            Download Resume
+        {/* Social Media Links */}
+        <div className="flex space-x-6 text-2xl mt-4">
+          <a href="https://github.com/Nandita2002" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400">
+            <FaGithub />
           </a>
-        </motion.div>
+          <a href="https://linkedin.com/in/nandita" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400">
+            <FaLinkedin />
+          </a>
+          <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400">
+            <FaTwitter />
+          </a>
+          <a href="mailto:nanditam2029@gmail.com" className="hover:text-purple-400">
+            <FaEnvelope />
+          </a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400">
+            <FaInstagram />
+          </a>
+        </div>
+      </motion.section>
 
-        {/* RIGHT SIDE IMAGE */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9 }}
-          className="flex-1 flex justify-center"
-        >
-          <div className="w-72 h-72 md:w-96 md:h-96 overflow-hidden rounded-full border-4 border-pink-400/40 shadow-[0_0_25px_rgba(236,72,153,0.6)]">
-            <Image
-              src="/profilepic.jpg"
-              alt="Nandita Mahesh"
-              width={400}
-              height={400}
-              className="object-cover w-full h-full hover:scale-105 transition duration-500"
-            />
-          </div>
-        </motion.div>
-      </section>
+      {/* Portfolio Section */}
+      <motion.section
+        className="max-w-4xl w-full"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-3xl font-semibold mb-6 text-center">Portfolio</h2>
+        <p className="text-purple-200 text-center">
+          Experienced in <span className="font-semibold">Web Development, MERN stack, and Digital Solutions</span>.  
+          I create responsive, accessible, and optimized applications that deliver seamless user experiences.
+        </p>
+      </motion.section>
 
-      {/* PROJECTS SECTION */}
-      <SectionWrapper title="💻 My Projects" color="text-pink-400">
-        {projects}
-      </SectionWrapper>
+      {/* Projects Section */}
+      <motion.section
+        className="max-w-5xl w-full"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-3xl font-semibold mb-8 text-center">Projects</h2>
+        <div className="grid gap-8 sm:grid-cols-2">
+          {/* Project 1 */}
+          <motion.div
+            className="bg-purple-800/50 p-6 rounded-2xl shadow-md hover:shadow-lg transition"
+            whileHover={{ scale: 1.03 }}
+          >
+            <h3 className="text-xl font-semibold mb-2">Student Sync</h3>
+            <p className="text-purple-200 mb-3">
+              A student management system built with Next.js and MongoDB to manage courses, attendance, and
+              performance tracking.
+            </p>
+            <a
+              href="https://github.com/Nandita2002/Student_Sync"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-300 hover:underline"
+            >
+              View Project →
+            </a>
+          </motion.div>
 
-      {/* ONGOING PROJECTS SECTION */}
-      <SectionWrapper title="🚧 Ongoing Projects" color="text-yellow-300">
-        {ongoingProjects}
-      </SectionWrapper>
+          {/* Project 2 */}
+          <motion.div
+            className="bg-purple-800/50 p-6 rounded-2xl shadow-md hover:shadow-lg transition"
+            whileHover={{ scale: 1.03 }}
+          >
+            <h3 className="text-xl font-semibold mb-2">Hands-on Seva (NGO Website)</h3>
+            <p className="text-purple-200 mb-3">
+              An NGO platform built using Next.js and TailwindCSS, connecting volunteers with social initiatives.
+            </p>
+            <a
+              href="https://github.com/Nandita2002/Hands-on-seva-An-NGO"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-300 hover:underline"
+            >
+              View Project →
+            </a>
+          </motion.div>
+        </div>
+      </motion.section>
 
-      {/* FOOTER */}
-      <footer className="py-6 text-center text-gray-400 border-t border-gray-800">
-        Made with 💻🔥 by <span className="text-pink-400 font-semibold">Nandita Mahesh</span>
-      </footer>
+      {/* Upcoming Projects Section */}
+      <motion.section
+        className="max-w-4xl w-full"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-3xl font-semibold mb-6 text-center">Upcoming Projects</h2>
+        <ul className="list-disc list-inside text-purple-200 space-y-3">
+          <li>QR Code Generator (Next.js + Tailwind CSS + TypeScript)</li>
+          <li>Visiting Card Generator (Next.js + Tailwind CSS)</li>
+          <li>Accessible Learning Platform for Disabled Individuals (MERN Stack)</li>
+        </ul>
+      </motion.section>
     </main>
   );
 }
-
-/* REUSABLE SECTIONS */
-const SectionWrapper = ({ title, children, color }) => (
-  <section className="py-20 px-6 relative">
-    <h2 className={`text-4xl font-extrabold text-center mb-14 ${color}`}>{title}</h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-      {children.map((project, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-[0_0_20px_rgba(0,255,128,0.2)] hover:scale-105 transition-transform"
-        >
-          <div className="w-full h-48 mb-4 overflow-hidden rounded-lg">
-            <Image src={project.image} alt={project.name} width={500} height={300} className="object-cover w-full h-full hover:scale-110 transition duration-500" />
-          </div>
-          <h3 className="text-2xl font-bold mb-2 text-white">{project.name}</h3>
-          <p className="text-gray-300 mb-3">{project.description}</p>
-          <p className="text-sm text-green-400 mb-4 font-mono">Tech Stack: {project.tech}</p>
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full hover:opacity-90 transition font-semibold shadow-[0_0_12px_rgba(236,72,153,0.6)]"
-          >
-            View Project →
-          </a>
-        </motion.div>
-      ))}
-    </div>
-  </section>
-);
-
-/* PROJECT DATA */
-const projects = [
-  {
-    name: "Forest Life Foundation",
-    description: "Official live website built for environmental NGO.",
-    tech: "Next.js, TypeScript, MongoDB, SEO, Vercel",
-    image: "/projects/forestlife.png",
-    link: "https://www.forestlifefoundation.org/",
-  },
-  {
-    name: "Cordito (Busibay)",
-    description: "Digital workflow management platform.",
-    tech: "Next.js, TypeScript, Firebase, REST APIs",
-    image: "/projects/cordito.png",
-    link: "https://www.cordito.com",
-  },
-  {
-    name: "QR Code Generator",
-    description: "A responsive and lightweight QR Code generator with certificate verification.",
-    tech: "React, Tailwind CSS, TypeScript, QRCode.react, html2canvas",
-    image: "/projects/qrcode.png",
-    link: "https://qr-code-generator-chi-mauve.vercel.app/",
-  },
-  {
-    name: "Student Management System",
-    description: "Comprehensive MERN stack based student information system.",
-    tech: "MongoDB, Express.js, React, Node.js, Tailwind",
-    image: "/projects/student.png",
-    link: "https://github.com/Nandita2002/Student_Sync",
-  },
-  {
-    name: "Hands on Seva NGO",
-    description: "NGO platform built with full-stack technologies.",
-    tech: "React.js, Node.js, MongoDB, Express.js",
-    image: "/projects/hos.png",
-    link: "https://github.com/Nandita2002/Hands-on-seva-An-NGO",
-  }
-];
-
-const ongoingProjects = [
-  {
-    name: "Visiting Card Generator",
-    description: "Generate and customize digital visiting cards with live preview and QR code export.",
-    tech: "Next.js, TypeScript, Tailwind CSS, QRCode.react, html2canvas",
-    image: "/projects/vcard.png",
-    link: "https://visiting-card-generator-gamma.vercel.app/",
-  },
-  {
-    name: "E-Certificate Generator",
-    description: "Advanced certificate generator with real-time form data, QR verification, and customizable design.",
-    tech: "MongoDB, Express.js, React, Node.js, Tailwind CSS, jsPDF",
-    image: "/projects/e-cert.png",
-    link: "https://certificate-generator-two-pi.vercel.app/",
-  },
-  {
-    name: "Social Gradeup Web App",
-    description: "SEO-friendly digital agency platform with modern UI and smooth animations.",
-    tech: "Next.js, TypeScript, Tailwind CSS, Framer Motion, SEO",
-    image: "/projects/socialg.png",
-    link: "/",
-  },
-];
-
-/* SOCIAL ICONS */
-const SocialIcons = () => (
-  <>
-    <a href="https://github.com/Nandita2002" target="_blank" rel="noopener noreferrer">
-      <FaGithub size={32} className="hover:text-green-400 transition drop-shadow-[0_0_10px_rgba(0,255,128,0.6)]" />
-    </a>
-    <a href="https://www.linkedin.com/in/nandita-mahesh" target="_blank" rel="noopener noreferrer">
-      <FaLinkedin size={32} className="hover:text-blue-400 transition drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]" />
-    </a>
-    <a href="https://twitter.com/nandita" target="_blank" rel="noopener noreferrer">
-      <FaTwitter size={32} className="hover:text-sky-400 transition drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]" />
-    </a>
-    <a href="https://www.instagram.com/nandita_mahesh" target="_blank" rel="noopener noreferrer">
-      <FaInstagram size={32} className="hover:text-pink-400 transition drop-shadow-[0_0_10px_rgba(236,72,153,0.6)]" />
-    </a>
-    <a href="mailto:nanditam2029@gmail.com">
-      <FaEnvelope size={32} className="hover:text-yellow-300 transition drop-shadow-[0_0_10px_rgba(253,224,71,0.6)]" />
-    </a>
-  </>
-);
