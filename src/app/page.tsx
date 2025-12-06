@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import {
   FaGithub,
   FaLinkedin,
@@ -172,8 +173,8 @@ const ARTICLES: Article[] = [
 const SLIDES = ['About', 'Projects', 'Skills', 'Contact'] as const;
 type SlideKey = (typeof SLIDES)[number];
 
-// keep it simple for framer custom
-const slideVariants: any = {
+// ✅ typed correctly, no `any`
+const slideVariants: Variants = {
   enter: (dir: 1 | -1) => ({
     x: dir === 1 ? 80 : -80,
     opacity: 0,
@@ -652,6 +653,23 @@ function SkillsSlide() {
           <p>EduTech, NGOs, digital marketing, internal tools.</p>
         </div>
       </div>
+
+      {/* Tag cloud using SKILLS (no unused var warning) */}
+      <div className="mt-3">
+        <p className="mb-1 text-[11px] text-fuchsia-300 md:text-xs">
+          Core tools I work with
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {SKILLS.map((skill) => (
+            <span
+              key={skill}
+              className="rounded-full border border-white/20 bg-black/40 px-2 py-1 text-[10px] text-purple-100"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -685,7 +703,7 @@ function ContactSlide() {
         </div>
       </div>
 
-      <div className="mt-3 flex flex-col items-start justify-between gap-3 md:flex-row md:items-center">
+      <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <a
           href={`mailto:${PROFILE.email}`}
           className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 px-4 py-2 text-xs font-semibold text-black shadow-lg shadow-cyan-400/40 transition hover:from-cyan-300 hover:to-fuchsia-300 md:text-sm"
@@ -696,6 +714,22 @@ function ContactSlide() {
           Send the problem statement / job description. I&apos;ll reply with
           what I can realistically deliver and timelines.
         </p>
+      </div>
+
+      {/* Social links row so SOCIAL_LINKS is used */}
+      <div className="mt-2 flex flex-wrap items-center gap-3 text-lg text-purple-200">
+        {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+          <a
+            key={label}
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/40 p-2 text-base hover:border-cyan-300/70 hover:bg-cyan-500/10"
+            aria-label={label}
+          >
+            <Icon />
+          </a>
+        ))}
       </div>
     </div>
   );
