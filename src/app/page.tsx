@@ -1,736 +1,532 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import type { Variants } from 'framer-motion';
+import { useRef } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
+import { motion, type Variants, useMotionValue, useSpring } from 'framer-motion';
 import {
+  FaArrowRight,
+  FaBolt,
+  FaCodeBranch,
+  FaDribbble,
+  FaEnvelope,
   FaGithub,
   FaLinkedin,
-  FaTwitter,
-  FaEnvelope,
-  FaInstagram,
+  FaLocationArrow,
+  FaRegStar,
 } from 'react-icons/fa';
 
 type Project = {
   title: string;
-  stack: string;
+  category: string;
+  summary: string;
+  stack: string[];
   link: string;
 };
 
-type Metric = {
-  label: string;
-  value: string;
-};
-
-type Article = {
+type Service = {
   title: string;
-  link: string;
-  tag?: string;
+  description: string;
+};
+
+type Stat = {
+  value: string;
+  label: string;
 };
 
 const PROFILE = {
   name: 'Nandita Mahesh',
   role: 'Associate Software Developer & Delivery Manager',
-  tagline:
-    'Full-stack engineer focused on scalable web platforms, clean delivery, and real-world impact.',
-  email: 'nanditam2029@gmail.com',
   location: 'India',
+  email: 'nanditam2029@gmail.com',
+  intro:
+    'I design and engineer premium web products that blend visual craft, smooth motion, and dependable delivery.',
 };
 
-const SOCIAL_LINKS = [
-  { label: 'GitHub', href: 'https://github.com/Nandita2002', Icon: FaGithub },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/nandita', Icon: FaLinkedin },
-  { label: 'Twitter', href: 'https://twitter.com/', Icon: FaTwitter },
-  { label: 'Email', href: `mailto:${PROFILE.email}`, Icon: FaEnvelope },
-  { label: 'Instagram', href: 'https://instagram.com/', Icon: FaInstagram },
+const NAV = [
+  { label: 'Home', href: '#home' },
+  { label: 'Work', href: '#work' },
+  { label: 'Services', href: '#services' },
+  { label: 'Contact', href: '#contact' },
 ];
 
-const FEATURED_PROJECTS: Project[] = [
+const STATS: Stat[] = [
+  { value: '12+', label: 'Products shipped' },
+  { value: '1.2k+', label: 'Commits delivered' },
+  { value: '10+', label: 'Deployments' },
+];
+
+const PROJECTS: Project[] = [
   {
-    title: 'Student Sync',
-    stack: 'Next.js · MongoDB · Tailwind · NextAuth',
+    title: 'Student Sync Platform',
+    category: 'Dashboard Product',
+    summary:
+      'Complete student lifecycle system with role-based dashboards, attendance workflows, and analytics.',
+    stack: ['Next.js', 'MongoDB', 'NextAuth', 'Tailwind CSS'],
     link: 'https://github.com/Nandita2002/Student_Sync',
   },
   {
     title: 'Hands-on Seva NGO',
-    stack: 'Next.js · Tailwind · MongoDB',
+    category: 'Social Impact Web App',
+    summary:
+      'Volunteer and campaign platform designed for clarity, easy updates, and team collaboration.',
+    stack: ['Next.js', 'MongoDB', 'Tailwind CSS'],
     link: 'https://github.com/Nandita2002/Hands-on-seva-An-NGO',
   },
   {
-    title: 'QR Code Generator',
-    stack: 'Next.js · TypeScript · Tailwind',
-    link: 'https://github.com/Nandita2002/QR-code-generator',
-  },
-  {
-    title: 'Visiting Card Generator',
-    stack: 'Next.js · Tailwind',
-    link: 'https://github.com/Nandita2002/visiting-card-generator',
-  },
-  {
     title: 'Certificate Generator',
-    stack: 'Next.js · Tailwind · QR',
+    category: 'Automation Tool',
+    summary:
+      'Template-based certificate generation system with dynamic QR verification and export flow.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     link: 'https://github.com/Nandita2002/certificate-generator',
   },
+];
+
+const SERVICES: Service[] = [
   {
-    title: 'pkbook',
-    stack: 'Next.js · Node.js · MongoDB',
-    link: 'https://github.com/Nandita2002/pkbook',
+    title: 'Product UI Engineering',
+    description:
+      'Responsive frontend development with polished interface details and smooth interactions.',
   },
   {
-    title: 'SocialGradeup – Agency',
-    stack: 'Next.js · Tailwind · SEO',
-    link: 'https://github.com/Nandita2002/socialgradeup',
+    title: 'Full-stack Delivery',
+    description:
+      'From requirements to release: architecture, APIs, frontend, QA handoff, and production readiness.',
   },
   {
-    title: 'Forestlife Foundation',
-    stack: 'Next.js · Tailwind',
-    link: 'https://github.com/Nandita2002/Formsite-foundation',
+    title: 'Execution & Coordination',
+    description:
+      'Clear communication with stakeholders and predictable release cycles for business outcomes.',
   },
 ];
 
-const OTHER_REPOS: string[] = [
-  'portfolio',
-  'client',
-  'student-management-system-cmss',
-  'student-payment-system',
-  'student-management-System',
-  'iimtify-it-certification',
-  'spotify-clone',
-  'sign-in-and-sign-up-form',
-  'portfolio-website',
-  'clock',
-  'simple-login-form',
+const SOCIALS = [
+  { label: 'GitHub', href: 'https://github.com/Nandita2002', Icon: FaGithub },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/nandita', Icon: FaLinkedin },
+  { label: 'Dribbble', href: 'https://dribbble.com/', Icon: FaDribbble },
 ];
 
-const SKILLS: string[] = [
+const HERO_SKILLS = [
   'Next.js',
-  'React',
   'TypeScript',
-  'Node.js',
+  'Framer Motion',
+  'Design Systems',
+  'API Design',
   'MongoDB',
-  'Tailwind CSS',
-  'REST APIs',
-  'Git & GitHub',
-  'Project Delivery',
-  'Client Communication',
+  'UI Engineering',
+  'Delivery Management',
 ];
 
-const METRICS: Metric[] = [
-  { label: 'Build', value: 'PASS' },
-  { label: 'Deployments', value: '10+ prod' },
-  { label: 'Latency', value: '42ms' },
-  { label: 'Commits', value: '1,200+' },
-];
-
-const DEV_LEVEL = {
-  level: 12,
-  xpPercent: 73, // % toward next level
-  title: 'Full-Stack Engineer Progress',
-  mission: 'Ship reliable, production-ready web products.',
+const container: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+  },
 };
 
-const ACTIVITY_LOGS: string[] = [
-  'Compiling timeline… OK',
-  'Syncing GitHub repositories… 8 featured, 10+ misc',
-  'Loading NGO & EduTech projects… OK',
-  'Checking deployment status… all green',
-  'Scanning tech stack… Next.js · Node.js · MongoDB · Tailwind',
-  'Preparing project spotlight… ready',
-];
-
-const TIME_LINES: string[] = [
-  'System uptime synced with reality…',
-  'Temporal module calibrated successfully.',
-  'Clock drift: 0.0001ms — stable.',
-  'Monitoring timeline integrity…',
-  'Chronology checkpoint updated.',
-  'Local timestream active.',
-  'Syncing with universal clock…',
-  'Time node online.',
-  'Coordinates locked in present moment.',
-  'Temporal engine running nominal.',
-];
-
-// TODO: replace `link` with your actual LinkedIn article URLs
-const ARTICLES: Article[] = [
-  {
-    title: 'Designing a Student Management System with Next.js & MongoDB',
-    link: '#',
-    tag: 'Architecture',
-  },
-  {
-    title: 'Building Reliable Dashboards for NGOs & Social Impact Platforms',
-    link: '#',
-    tag: 'Product · NGOs',
-  },
-  {
-    title: 'From Idea to Deployment: How I Ship Web Apps End-to-End',
-    link: '#',
-    tag: 'Process',
-  },
-];
-
-const SLIDES = ['About', 'Projects', 'Skills', 'Contact'] as const;
-type SlideKey = (typeof SLIDES)[number];
-
-// ✅ typed correctly, no `any`
-const slideVariants: Variants = {
-  enter: (dir: 1 | -1) => ({
-    x: dir === 1 ? 80 : -80,
-    opacity: 0,
-    scale: 0.97,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-  },
-  exit: (dir: 1 | -1) => ({
-    x: dir === 1 ? -80 : 80,
-    opacity: 0,
-    scale: 0.97,
-  }),
+const item: Variants = {
+  hidden: { opacity: 0, y: 22, scale: 0.98 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } },
 };
 
 export default function Home() {
-  const [activeSlide, setActiveSlide] = useState<SlideKey>('About');
-  const [direction, setDirection] = useState<1 | -1>(1);
-  const [logIndex, setLogIndex] = useState(0);
-  const [now, setNow] = useState<Date>(new Date());
-  const [timeLineIndex, setTimeLineIndex] = useState(0);
-  const [mounted, setMounted] = useState(false); // avoid hydration mismatch
-
-  // mark when we're on the client
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Auto-rotate slides
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDirection(1);
-      setActiveSlide((prev) => {
-        const currentIndex = SLIDES.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % SLIDES.length;
-        return SLIDES[nextIndex];
-      });
-    }, 9000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Auto-rotate activity logs
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setLogIndex((prev) => (prev + 1) % ACTIVITY_LOGS.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Live clock
-  useEffect(() => {
-    const timer = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Rotate tricky time lines
-  useEffect(() => {
-    const timer = setInterval(
-      () => setTimeLineIndex((prev) => (prev + 1) % TIME_LINES.length),
-      5000
-    );
-    return () => clearInterval(timer);
-  }, []);
-
-  // Keyboard controls: ← → and 1–4
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        setDirection(1);
-        setActiveSlide((prev) => {
-          const i = SLIDES.indexOf(prev);
-          return SLIDES[(i + 1) % SLIDES.length];
-        });
-      }
-      if (e.key === 'ArrowLeft') {
-        setDirection(-1);
-        setActiveSlide((prev) => {
-          const i = SLIDES.indexOf(prev);
-          return SLIDES[(i - 1 + SLIDES.length) % SLIDES.length];
-        });
-      }
-
-      if (['1', '2', '3', '4'].includes(e.key)) {
-        const index = Number(e.key) - 1;
-        if (SLIDES[index]) {
-          setDirection(index > SLIDES.indexOf(activeSlide) ? 1 : -1);
-          setActiveSlide(SLIDES[index]);
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [activeSlide]);
-
-  const handleSlideChange = (target: SlideKey) => {
-    const currentIndex = SLIDES.indexOf(activeSlide);
-    const targetIndex = SLIDES.indexOf(target);
-    setDirection(targetIndex > currentIndex ? 1 : -1);
-    setActiveSlide(target);
-  };
-
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-slate-950 text-white">
-      {/* BACKGROUND MAGIC */}
+    <main className="relative min-h-screen overflow-hidden bg-[#fcfefd] text-slate-900">
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-32 -left-24 h-72 w-72 rounded-full bg-purple-600/50 blur-3xl"
-          animate={{ x: [0, 20, -10, 0], y: [0, 10, -10, 0] }}
+          className="absolute -top-16 left-0 h-72 w-72 rounded-full bg-blue-300/30 blur-3xl"
+          animate={{ x: [0, 30, 0], y: [0, 20, 0], scale: [1, 1.08, 1] }}
+          transition={{ duration: 16, repeat: Infinity, repeatType: 'mirror' }}
+        />
+        <motion.div
+          className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-emerald-300/30 blur-3xl"
+          animate={{ x: [0, -28, 0], y: [0, -18, 0], scale: [1, 1.05, 1] }}
           transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror' }}
         />
         <motion.div
-          className="absolute -bottom-40 -right-20 h-80 w-80 rounded-full bg-cyan-500/40 blur-3xl"
-          animate={{ x: [0, -30, 10, 0], y: [0, -15, 10, 0] }}
-          transition={{ duration: 22, repeat: Infinity, repeatType: 'mirror' }}
+          className="absolute bottom-8 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-blue-200/30 blur-3xl"
+          animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 14, repeat: Infinity, repeatType: 'mirror' }}
         />
-        <motion.div
-          className="absolute top-1/3 -right-10 h-56 w-56 rounded-full bg-fuchsia-500/30 blur-3xl"
-          animate={{ y: [0, -20, 10, 0] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: 'mirror' }}
-        />
-        {/* subtle grid */}
-        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] [background-size:40px_40px]" />
-        {/* vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.07),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_35%)]" />
       </div>
 
-      {/* FOREGROUND */}
-      <div className="relative z-10 flex min-h-screen flex-col px-4 pb-4 pt-3 md:px-10 md:pb-6 md:pt-5">
-        {/* HEADER */}
-        <header className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/40 bg-gradient-to-br from-purple-500 via-fuchsia-500 to-cyan-400 text-base font-semibold shadow-lg shadow-purple-500/50 md:h-12 md:w-12 md:text-lg">
-              NM
-            </div>
-            <div>
-              <h1 className="text-xl font-semibold tracking-tight md:text-2xl">
-                {PROFILE.name}
-              </h1>
-              <p className="text-xs text-purple-100 md:text-sm">
-                {PROFILE.role}
-              </p>
-              <p className="text-[10px] text-purple-300 md:text-xs">
-                Class: Full-Stack Engineer
-              </p>
-            </div>
-          </div>
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-10 pt-4 sm:px-6 sm:pt-6 md:px-8">
+        <motion.header
+          initial={{ opacity: 0, y: -18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="sticky top-3 z-30 rounded-2xl border border-white/80 bg-white/85 px-4 py-3 shadow-[0_14px_30px_rgba(37,99,235,0.14)] backdrop-blur-xl md:px-6"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <a href="#home" className="flex items-center gap-3">
+              <motion.div
+                whileHover={{ rotate: 6, scale: 1.05 }}
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(37,99,235,0.24)]"
+              >
+                NM
+              </motion.div>
+              <div className="leading-tight">
+                <p className="text-sm font-semibold text-slate-900">{PROFILE.name}</p>
+                <p className="text-[11px] text-slate-500">{PROFILE.role}</p>
+              </div>
+            </a>
 
-          {/* RIGHT: time/date + tricky line + tabs */}
-          <div className="flex flex-col items-end gap-1">
-            {/* time + date (only render on client to avoid hydration issues) */}
-            {mounted && (
-              <>
-                <div className="flex items-center gap-2 font-mono text-[10px] text-purple-200 md:text-xs">
-                  <span>
-                    {now.toLocaleDateString(undefined, {
-                      year: 'numeric',
-                      month: 'short',
-                      day: '2-digit',
-                    })}
-                  </span>
-                  <span className="h-1 w-1 rounded-full bg-cyan-400" />
-                  <span suppressHydrationWarning>
-                    {now.toLocaleTimeString(undefined, {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      second: '2-digit',
-                    })}
-                  </span>
-                </div>
-                <p className="max-w-xs text-right font-mono text-[10px] text-purple-300 md:text-xs">
-                  {TIME_LINES[timeLineIndex]}
-                </p>
-              </>
-            )}
-
-            {/* Tabs */}
-            <nav className="mt-1 flex items-center gap-1.5 self-start rounded-full border border-white/20 bg-black/40 px-1.5 py-1 shadow-[0_0_20px_rgba(34,211,238,0.25)] md:self-auto md:gap-2">
-              {SLIDES.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => handleSlideChange(s)}
-                  className={`rounded-full px-3 py-1.5 text-[11px] transition md:text-xs ${
-                    activeSlide === s
-                      ? 'bg-gradient-to-r from-cyan-400 to-fuchsia-400 text-black shadow-md shadow-cyan-400/40'
-                      : 'text-purple-100 hover:bg-white/10 active:scale-95'
-                  }`}
+            <nav className="flex flex-wrap items-center justify-end gap-2 text-xs">
+              {NAV.map((itemNav) => (
+                <motion.a
+                  key={itemNav.href}
+                  href={itemNav.href}
+                  whileHover={{ y: -2 }}
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-slate-600 transition hover:border-blue-300 hover:text-blue-700"
                 >
-                  {s}
-                </button>
+                  {itemNav.label}
+                </motion.a>
               ))}
             </nav>
           </div>
-        </header>
+        </motion.header>
 
-        {/* METRICS STRIP (HUD FEEL) */}
-        <section className="mt-2 mb-1 flex flex-wrap gap-2 text-[10px] font-mono text-purple-200 md:text-xs">
-          {METRICS.map((m) => (
-            <div
-              key={m.label}
-              className="flex items-center gap-1 rounded-full border border-white/15 bg-black/40 px-2 py-1 shadow-[0_0_16px_rgba(15,23,42,0.9)] hover:border-cyan-300/70 hover:bg-cyan-400/10 transition"
+        <motion.section
+          id="home"
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="mt-6 grid gap-4 rounded-[2rem] border border-white/80 bg-white/80 p-4 shadow-[0_24px_45px_rgba(16,185,129,0.12)] backdrop-blur-xl sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:p-8"
+        >
+          <motion.article variants={item}>
+            <motion.p
+              whileHover={{ scale: 1.03 }}
+              className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700"
             >
-              <span className="text-cyan-300">{m.label}:</span>
-              <span>{m.value}</span>
+              <FaRegStar className="text-[10px]" />
+              Animated folio-style developer portfolio
+            </motion.p>
+            <h1 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              Creative visual systems. Smooth interactions. Strong execution.
+            </h1>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+              {PROFILE.intro}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <motion.a
+                href={`mailto:${PROFILE.email}`}
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(37,99,235,0.28)] transition hover:from-emerald-400 hover:to-blue-500"
+              >
+                Hire me
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, repeatType: 'mirror' }}
+                >
+                  <FaArrowRight className="text-xs" />
+                </motion.span>
+              </motion.a>
+              <motion.a
+                href="#work"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-[0_9px_19px_rgba(16,185,129,0.13)] transition hover:border-blue-300 hover:text-blue-700"
+              >
+                Explore work
+              </motion.a>
             </div>
-          ))}
+
+            <SkillsMarquee />
+
+            <motion.div variants={container} className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
+              {STATS.map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  variants={item}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_8px_16px_rgba(37,99,235,0.09)]"
+                >
+                  <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
+                  <p className="text-xs text-slate-500">{stat.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.article>
+
+          <ParallaxHeroCard variants={item} />
+        </motion.section>
+
+        <section id="work" className="mt-8">
+          <SectionHeading
+            eyebrow="Selected work"
+            title="Projects with premium visuals and measurable outcomes"
+          />
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-70px' }}
+            className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
+            {PROJECTS.map((project) => (
+              <motion.a
+                key={project.title}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={item}
+                whileHover={{ y: -6 }}
+                className="group rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_14px_30px_rgba(16,185,129,0.1)] transition hover:border-blue-300 hover:shadow-[0_20px_36px_rgba(37,99,235,0.2)]"
+              >
+                <p className="text-[11px] uppercase tracking-[0.16em] text-blue-700">{project.category}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-900">{project.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{project.summary}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {project.stack.map((tool) => (
+                    <span
+                      key={tool}
+                      className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] text-emerald-700"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+                <motion.span
+                  className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-blue-700"
+                  whileHover={{ x: 2 }}
+                >
+                  View project <FaArrowRight className="text-[10px]" />
+                </motion.span>
+              </motion.a>
+            ))}
+          </motion.div>
         </section>
 
-        {/* DEV STATUS – game-like feel */}
-        <section className="mb-1 w-full max-w-xl">
-          <div className="rounded-2xl border border-white/20 bg-black/40 px-3 py-3 shadow-[0_0_18px_rgba(8,47,73,0.8)]">
-            <div className="flex items-center justify-between font-mono text-[10px] text-purple-100 md:text-xs">
-              <span className="text-cyan-300">
-                Player: {PROFILE.name} · Lv {DEV_LEVEL.level}
-              </span>
-              <span>{DEV_LEVEL.title}</span>
-            </div>
-            <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-fuchsia-400"
-                style={{ width: `${DEV_LEVEL.xpPercent}%` }}
-              />
-            </div>
-            <div className="mt-1 flex justify-between font-mono text-[10px] text-purple-200 md:text-[11px]">
-              <span>XP</span>
-              <span>{DEV_LEVEL.xpPercent}% to next milestone</span>
-            </div>
-            <p className="mt-2 text-[10px] text-purple-300 md:text-xs">
-              Current mission: {DEV_LEVEL.mission}
+        <section id="services" className="mt-10">
+          <SectionHeading eyebrow="Services" title="How I can help your product team" />
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-70px' }}
+            className="mt-4 grid gap-4 md:grid-cols-3"
+          >
+            {SERVICES.map((service) => (
+              <motion.article
+                key={service.title}
+                variants={item}
+                whileHover={{ y: -4 }}
+                className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_12px_26px_rgba(37,99,235,0.1)]"
+              >
+                <h3 className="text-base font-semibold text-slate-900">{service.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{service.description}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+        </section>
+
+        <motion.section
+          id="contact"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="mt-10 rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-emerald-50 p-5 shadow-[0_22px_42px_rgba(37,99,235,0.16)] sm:p-7"
+        >
+          <p className="text-xs uppercase tracking-[0.2em] text-blue-700">Contact</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Let&apos;s craft your next standout digital product.
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-slate-600 sm:text-base">
+            Share your brief, design direction, or product goals. I can help transform ideas
+            into responsive, production-ready experiences.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <motion.a
+              href={`mailto:${PROFILE.email}`}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            >
+              <FaEnvelope />
+              {PROFILE.email}
+            </motion.a>
+            <motion.a
+              href="https://github.com/Nandita2002"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
+            >
+              <FaGithub />
+              GitHub
+            </motion.a>
+          </div>
+        </motion.section>
+
+        <footer className="mt-8 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-xs text-slate-500 sm:px-6">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p>Designed and developed by {PROFILE.name}.</p>
+            <p className="inline-flex items-center gap-1.5">
+              <FaCodeBranch className="text-[10px]" />
+              Motion-rich folio-style layout built with Next.js and Framer Motion.
             </p>
           </div>
-        </section>
-
-        {/* MAIN SLIDES AREA */}
-        <section className="flex flex-1 items-center justify-center px-1 pt-4 pb-4 md:px-4 md:pb-6">
-          <div className="flex h-full w-full items-center justify-center">
-            <AnimatePresence custom={direction} mode="wait">
-              <motion.div
-                key={activeSlide}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.45, ease: 'easeInOut' }}
-                className="w-full max-w-5xl rounded-3xl border border-white/15 bg-white/7 p-4 shadow-xl backdrop-blur-3xl md:p-8"
-              >
-                {activeSlide === 'About' && <AboutSlide />}
-                {activeSlide === 'Projects' && <ProjectsSlide />}
-                {activeSlide === 'Skills' && <SkillsSlide />}
-                {activeSlide === 'Contact' && <ContactSlide />}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </section>
-
-        {/* FOOTER + ACTIVITY LOG */}
-        <footer className="mt-auto space-y-1">
-          <div className="flex items-center justify-between text-[10px] text-purple-200 md:text-xs">
-            <span className="font-mono">
-              mode: <span className="text-cyan-300">slideshow</span> · auto-cycle:{' '}
-              <span className="text-fuchsia-300">on</span>
-            </span>
-            <span className="font-mono">
-              slide {SLIDES.indexOf(activeSlide) + 1}/{SLIDES.length} · controls:{' '}
-              <span className="text-cyan-300">← →</span> &nbsp;/&nbsp;{' '}
-              <span className="text-cyan-300">1–4</span>
-            </span>
-          </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={logIndex}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="flex w-full items-center gap-2 rounded-2xl border border-cyan-400/40 bg-black/60 px-3 py-2 font-mono text-[10px] text-cyan-200 md:text-xs"
-            >
-              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-              <span>{ACTIVITY_LOGS[logIndex]}</span>
-            </motion.div>
-          </AnimatePresence>
         </footer>
       </div>
     </main>
   );
 }
 
-// SLIDES
+function ParallaxHeroCard({ variants }: { variants: Variants }) {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springRotateX = useSpring(rotateX, { stiffness: 150, damping: 18, mass: 0.6 });
+  const springRotateY = useSpring(rotateY, { stiffness: 150, damping: 18, mass: 0.6 });
 
-function AboutSlide() {
+  const handleMouseMove = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width;
+    const py = (event.clientY - rect.top) / rect.height;
+    rotateY.set((px - 0.5) * 14);
+    rotateX.set((0.5 - py) * 14);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
   return (
-    <div className="flex h-full flex-col justify-between gap-4">
-      <div>
-        <h2 className="mb-2 text-lg font-semibold md:text-xl">
-          About Nandita
-        </h2>
-        <p className="mb-2 text-xs text-purple-100 md:text-sm">
-          I&apos;m a full-stack engineer who cares about both clean engineering
-          and predictable delivery. I like taking ownership of a feature from
-          &quot;rough idea&quot; to shipped build — breaking it down, designing
-          the right data flow, building the UI and APIs, and making sure it
-          actually works for real users.
-        </p>
-        <p className="mb-2 text-xs text-purple-100 md:text-sm">
-          My current stack revolves around Next.js, React, TypeScript, Node.js,
-          MongoDB and Tailwind CSS. I&apos;ve built platforms for NGOs,
-          education, management systems and digital agencies — from student
-          lifecycle tools to NGO portals and branded websites.
-        </p>
-        <p className="text-xs text-purple-100 md:text-sm">
-          As a delivery manager, I&apos;m used to coordinating with clients,
-          tracking progress, and making sure releases don&apos;t become chaos.
-          The goal is simple: ship fast, ship clean, and keep it maintainable.
-        </p>
-      </div>
+    <motion.aside
+      variants={variants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative rounded-3xl border border-slate-200 bg-[#f9fcff] p-5 shadow-[0_20px_36px_rgba(37,99,235,0.14)] sm:p-6"
+      style={{
+        rotateX: springRotateX,
+        rotateY: springRotateY,
+        transformPerspective: 900,
+        transformStyle: 'preserve-3d',
+      }}
+      ref={cardRef}
+    >
+      <motion.div
+        className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-blue-200/60 blur-2xl"
+        animate={{ scale: [1, 1.14, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 5.8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-emerald-200/60 blur-2xl"
+        animate={{ scale: [1, 1.14, 1], opacity: [0.4, 0.68, 0.4] }}
+        transition={{ duration: 6.2, repeat: Infinity }}
+      />
 
-      <div className="mt-4 grid grid-cols-1 gap-3 text-[11px] text-purple-100 md:grid-cols-3 md:text-xs">
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Strengths</p>
-          <p>Ownership, fast execution, clean UI & APIs.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">I like building</p>
-          <p>Dashboards, internal tools, platforms with actual users.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Current focus</p>
-          <p>Product-based roles and serious web apps.</p>
-        </div>
-      </div>
+      <div className="relative space-y-4 [transform:translateZ(24px)]">
+        <AvatarOrbitalFrame />
 
-      {/* Recent writing / articles */}
-      <div className="mt-4 rounded-2xl border border-white/20 bg-black/30 p-3">
-        <p className="mb-2 text-[11px] uppercase tracking-[0.16em] text-fuchsia-300 md:text-xs">
-          Recent writing · LinkedIn style
-        </p>
+        <div className="rounded-2xl border border-blue-100 bg-white p-4">
+          <h2 className="text-xl font-semibold text-slate-900">{PROFILE.name}</h2>
+          <p className="mt-1 text-sm text-slate-600">{PROFILE.role}</p>
+          <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-500">
+            <FaLocationArrow className="text-[11px] text-blue-600" />
+            {PROFILE.location}
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-emerald-100 bg-white p-4">
+          <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-emerald-700">
+            <FaBolt className="text-[10px]" />
+            Collaboration style
+          </p>
+          <p className="mt-2 text-sm text-slate-600">
+            Fast execution, clean communication, and production-focused decisions.
+          </p>
+        </div>
+
         <div className="flex flex-wrap gap-2">
-          {ARTICLES.map((article) => (
-            <a
-              key={article.title}
-              href={article.link}
-              target={article.link === '#' ? undefined : '_blank'}
-              rel={article.link === '#' ? undefined : 'noopener noreferrer'}
-              className="group flex items-center gap-2 rounded-2xl border border-white/20 bg-black/40 px-3 py-2 text-[11px] hover:border-cyan-300/70 hover:bg-cyan-500/10 transition md:text-xs"
+          {SOCIALS.map(({ label, href, Icon }) => (
+            <motion.a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
             >
-              <div className="h-1.5 w-1.5 rounded-full bg-cyan-300 group-hover:bg-fuchsia-300" />
-              <div>
-                <p className="font-medium text-purple-50">
-                  {article.title}
-                  {article.link === '#' && (
-                    <span className="ml-1 text-[10px] text-purple-300">
-                      (add your LinkedIn URL)
-                    </span>
-                  )}
-                </p>
-                {article.tag && (
-                  <p className="text-[10px] text-purple-300">{article.tag}</p>
-                )}
-              </div>
-            </a>
+              <Icon className="text-[11px]" />
+              {label}
+            </motion.a>
           ))}
         </div>
+      </div>
+    </motion.aside>
+  );
+}
+
+function AvatarOrbitalFrame() {
+  return (
+    <div className="relative mx-auto flex h-36 w-36 items-center justify-center rounded-full">
+      <motion.div
+        className="absolute inset-0 rounded-full border-2 border-blue-200"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
+        className="absolute inset-2 rounded-full border-2 border-emerald-200"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
+        className="absolute top-2 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-blue-500 shadow-[0_0_16px_rgba(37,99,235,0.6)]"
+        animate={{ scale: [1, 1.25, 1] }}
+        transition={{ duration: 1.8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-2 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-emerald-500 shadow-[0_0_16px_rgba(16,185,129,0.6)]"
+        animate={{ scale: [1, 1.25, 1] }}
+        transition={{ duration: 1.8, delay: 0.9, repeat: Infinity }}
+      />
+      <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-blue-600 text-2xl font-semibold text-white shadow-[0_14px_24px_rgba(37,99,235,0.3)]">
+        NM
       </div>
     </div>
   );
 }
 
-function ProjectsSlide() {
-  return (
-    <div className="flex h-full flex-col gap-3">
-      <div className="mb-2 flex items-center justify-between">
-        <h2 className="text-lg font-semibold md:text-xl">Projects</h2>
-        <span className="font-mono text-[10px] text-purple-200 md:text-xs">
-          {FEATURED_PROJECTS.length} main · {OTHER_REPOS.length}+ repos
-        </span>
-      </div>
+function SkillsMarquee() {
+  const items = [...HERO_SKILLS, ...HERO_SKILLS];
 
-      <div className="grid flex-1 grid-cols-1 gap-3 overflow-y-auto pr-1 md:grid-cols-2">
-        {FEATURED_PROJECTS.map((p) => (
-          <a
-            key={p.title}
-            href={p.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col justify-between rounded-2xl border border-white/20 bg-black/35 p-3 transition hover:border-cyan-300/70 hover:bg-cyan-500/10"
+  return (
+    <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white/90 py-2">
+      <motion.div
+        className="flex w-max gap-2 px-2"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      >
+        {items.map((skill, index) => (
+          <span
+            key={`${skill}-${index}`}
+            className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700"
           >
-            <div>
-              <p className="mb-1 flex items-center justify-between gap-2 text-sm font-medium">
-                <span>{p.title}</span>
-                <span className="rounded-full border border-white/20 bg-white/5 px-2 py-0.5 text-[10px] group-hover:border-cyan-300/70">
-                  View →
-                </span>
-              </p>
-              <p className="mb-1 text-[11px] text-cyan-200">{p.stack}</p>
-            </div>
-            <p className="line-clamp-3 text-[11px] text-purple-100">
-              {p.title === 'Student Sync'
-                ? 'End-to-end student lifecycle management with role-based access, attendance and performance dashboards.'
-                : p.title === 'Hands-on Seva NGO'
-                ? 'NGO platform for campaigns, volunteers and public updates.'
-                : p.title === 'QR Code Generator'
-                ? 'Generate sharable QR codes instantly for URLs and text.'
-                : p.title === 'Visiting Card Generator'
-                ? 'Digital visiting card builder with live preview and export.'
-                : p.title === 'Certificate Generator'
-                ? 'Dynamic certificate builder with QR verification workflow.'
-                : p.title === 'pkbook'
-                ? 'Book/product-style platform with structured content.'
-                : p.title === 'SocialGradeup – Agency'
-                ? 'Digital agency site optimised for speed, SEO and lead flow.'
-                : 'Environmental NGO site for awareness and campaigns.'}
-            </p>
-          </a>
+            {skill}
+          </span>
         ))}
-      </div>
-
-      <div className="mt-1">
-        <p className="mb-1 text-[11px] text-fuchsia-300 md:text-xs">
-          Other repositories
-        </p>
-        <div className="flex max-h-14 flex-wrap gap-1.5 overflow-y-auto pr-1">
-          {OTHER_REPOS.map((r) => (
-            <span
-              key={r}
-              className="rounded-full border border-white/20 bg-black/40 px-2 py-1 text-[10px]"
-            >
-              {r}
-            </span>
-          ))}
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
-function SkillsSlide() {
+function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
-    <div className="flex h-full flex-col justify-between gap-4">
-      <div>
-        <h2 className="mb-2 text-lg font-semibold md:text-xl">
-          Skills & Stack
-        </h2>
-        <p className="mb-3 text-xs text-purple-100 md:text-sm">
-          Practical stack: strong frontend, simple backend, clear APIs and Git
-          practices that don&apos;t slow the team down. I care about code that
-          can survive production, not just pass a demo.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 gap-3 text-[11px] text-purple-100 md:grid-cols-3 md:text-xs">
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Frontend</p>
-          <p>Next.js, React, TypeScript, Tailwind CSS.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Backend</p>
-          <p>Node.js, Express, MongoDB, REST APIs.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Dev & tools</p>
-          <p>Git, GitHub, VS Code, Postman.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Delivery</p>
-          <p>Breaking features down, tracking, shipping on time.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Soft skills</p>
-          <p>Client communication, ownership, mentoring juniors.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-cyan-300">Domains</p>
-          <p>EduTech, NGOs, digital marketing, internal tools.</p>
-        </div>
-      </div>
-
-      {/* Tag cloud using SKILLS (no unused var warning) */}
-      <div className="mt-3">
-        <p className="mb-1 text-[11px] text-fuchsia-300 md:text-xs">
-          Core tools I work with
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {SKILLS.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full border border-white/20 bg-black/40 px-2 py-1 text-[10px] text-purple-100"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ContactSlide() {
-  return (
-    <div className="flex h-full flex-col justify-between gap-4">
-      <div>
-        <h2 className="mb-2 text-lg font-semibold md:text-xl">
-          Work with me
-        </h2>
-        <p className="mb-3 text-xs text-purple-100 md:text-sm">
-          If you&apos;re hiring for a product-based role or need someone to fix
-          or ship a serious web app, reach out.
-        </p>
-        <p className="text-xs text-purple-100 md:text-sm">
-          I prefer roles where I can own features end-to-end, reduce chaos for
-          the team, and make sure what we ship actually works for real users —
-          not just in slides.
-        </p>
-      </div>
-
-      <div className="mt-2 grid grid-cols-1 gap-3 text-[11px] text-purple-100 md:grid-cols-2 md:text-xs">
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-fuchsia-300">Ideal roles</p>
-          <p>Full-stack / Frontend Engineer in a product team.</p>
-        </div>
-        <div className="rounded-2xl border border-white/20 bg-black/35 p-3">
-          <p className="mb-1 text-fuchsia-300">How I can help</p>
-          <p>Turn requirements into shipped features with clean code.</p>
-        </div>
-      </div>
-
-      <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <a
-          href={`mailto:${PROFILE.email}`}
-          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-cyan-400 to-fuchsia-400 px-4 py-2 text-xs font-semibold text-black shadow-lg shadow-cyan-400/40 transition hover:from-cyan-300 hover:to-fuchsia-300 md:text-sm"
-        >
-          Email me: {PROFILE.email}
-        </a>
-        <p className="max-w-md text-[11px] text-purple-200 md:text-xs">
-          Send the problem statement / job description. I&apos;ll reply with
-          what I can realistically deliver and timelines.
-        </p>
-      </div>
-
-      {/* Social links row so SOCIAL_LINKS is used */}
-      <div className="mt-2 flex flex-wrap items-center gap-3 text-lg text-purple-200">
-        {SOCIAL_LINKS.map(({ label, href, Icon }) => (
-          <a
-            key={label}
-            href={href}
-            target={href.startsWith('http') ? '_blank' : undefined}
-            rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-black/40 p-2 text-base hover:border-cyan-300/70 hover:bg-cyan-500/10"
-            aria-label={label}
-          >
-            <Icon />
-          </a>
-        ))}
-      </div>
+    <div>
+      <p className="text-xs uppercase tracking-[0.2em] text-blue-700">{eyebrow}</p>
+      <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+        {title}
+      </h2>
     </div>
   );
 }
