@@ -4,35 +4,30 @@ import { motion } from 'framer-motion';
 import {
   FaArrowRight,
   FaCodeBranch,
-  FaCrown,
+  FaDribbble,
   FaEnvelope,
-  FaGamepad,
   FaGithub,
   FaLinkedin,
   FaLocationArrow,
-  FaRocket,
-  FaShieldAlt,
-  FaTrophy,
+  FaRegStar,
 } from 'react-icons/fa';
 
 type Project = {
   title: string;
-  status: string;
-  description: string;
-  impact: string;
+  category: string;
+  summary: string;
   stack: string[];
-  href: string;
+  link: string;
 };
 
-type SkillPath = {
+type Service = {
   title: string;
-  level: string;
-  tools: string[];
+  description: string;
 };
 
-type Achievement = {
-  title: string;
-  note: string;
+type Stat = {
+  value: string;
+  label: string;
 };
 
 const PROFILE = {
@@ -40,141 +35,111 @@ const PROFILE = {
   role: 'Associate Software Developer & Delivery Manager',
   location: 'India',
   email: 'nanditam2029@gmail.com',
-  tagline:
-    'Light-mode, game-inspired developer experience built with premium visuals and product-first engineering depth.',
+  intro:
+    'I build elegant digital experiences and robust web products with a clean UI style and product-focused engineering.',
 };
 
-const NAV_ITEMS = [
-  { label: 'Quest Board', href: '#projects' },
-  { label: 'Skill Tree', href: '#skills' },
-  { label: 'XP Log', href: '#experience' },
+const NAV = [
+  { label: 'Home', href: '#home' },
+  { label: 'Work', href: '#work' },
+  { label: 'Services', href: '#services' },
   { label: 'Contact', href: '#contact' },
 ];
 
-const PLAYER_STATS = [
-  { label: 'Level', value: '12' },
-  { label: 'XP Progress', value: '73%' },
-  { label: 'Production Drops', value: '10+' },
-  { label: 'Commits', value: '1.2k+' },
+const STATS: Stat[] = [
+  { value: '12+', label: 'Products shipped' },
+  { value: '1.2k+', label: 'Commits delivered' },
+  { value: '10+', label: 'Deployments' },
 ];
 
 const PROJECTS: Project[] = [
   {
-    title: 'Student Sync',
-    status: 'Main Quest',
-    description:
-      'Student lifecycle platform with role-based dashboards, attendance tracking, and academic flows.',
-    impact:
-      'Unified multiple admin operations into one product surface to reduce operational friction.',
+    title: 'Student Sync Platform',
+    category: 'Dashboard Product',
+    summary:
+      'A complete student lifecycle system with role-based dashboards, attendance workflows, and analytics.',
     stack: ['Next.js', 'MongoDB', 'NextAuth', 'Tailwind CSS'],
-    href: 'https://github.com/Nandita2002/Student_Sync',
+    link: 'https://github.com/Nandita2002/Student_Sync',
   },
   {
     title: 'Hands-on Seva NGO',
-    status: 'Social Impact Quest',
-    description:
-      'Campaign and volunteer portal with practical CMS-like workflows for non-technical teams.',
-    impact:
-      'Improved campaign visibility and publishing speed while keeping the user flow clear.',
+    category: 'Social Impact Web App',
+    summary:
+      'A volunteer and campaign platform designed for clarity, easy updates, and team collaboration.',
     stack: ['Next.js', 'MongoDB', 'Tailwind CSS'],
-    href: 'https://github.com/Nandita2002/Hands-on-seva-An-NGO',
+    link: 'https://github.com/Nandita2002/Hands-on-seva-An-NGO',
   },
   {
     title: 'Certificate Generator',
-    status: 'Automation Quest',
+    category: 'Automation Tool',
+    summary:
+      'A template-based certificate generation system with dynamic QR verification and export flow.',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    link: 'https://github.com/Nandita2002/certificate-generator',
+  },
+];
+
+const SERVICES: Service[] = [
+  {
+    title: 'Product UI Engineering',
     description:
-      'Dynamic certificate engine with QR verification support and reusable generation templates.',
-    impact:
-      'Enabled fast, repeatable issuance workflows for education and events.',
-    stack: ['Next.js', 'TypeScript', 'QR', 'Tailwind CSS'],
-    href: 'https://github.com/Nandita2002/certificate-generator',
+      'Responsive frontend development with polished interface details and performance-conscious builds.',
   },
   {
-    title: 'SocialGradeup',
-    status: 'Growth Quest',
+    title: 'Full-stack Delivery',
     description:
-      'Conversion-focused agency website built with speed, clarity, and SEO foundations.',
-    impact:
-      'Shipped a cleaner funnel and stronger digital presence for lead discovery.',
-    stack: ['Next.js', 'Tailwind CSS', 'SEO'],
-    href: 'https://github.com/Nandita2002/socialgradeup',
+      'From requirements to release: architecture, APIs, frontend, QA handoff, and production readiness.',
+  },
+  {
+    title: 'Execution & Coordination',
+    description:
+      'Clear communication with stakeholders and predictable release cycles for real business outcomes.',
   },
 ];
 
-const SKILL_PATHS: SkillPath[] = [
-  {
-    title: 'Frontend Combat',
-    level: 'Epic',
-    tools: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Motion UI'],
-  },
-  {
-    title: 'Backend Strategy',
-    level: 'Advanced',
-    tools: ['Node.js', 'Express', 'MongoDB', 'REST APIs', 'Auth pipelines'],
-  },
-  {
-    title: 'Delivery Leadership',
-    level: 'Elite',
-    tools: ['Scope planning', 'Client sync', 'Release ownership', 'QA handoff'],
-  },
-];
-
-const ACHIEVEMENTS: Achievement[] = [
-  {
-    title: 'Feature-to-production ownership',
-    note: 'Translate rough requirements into stable production features.',
-  },
-  {
-    title: 'Cross-domain delivery',
-    note: 'Built products across NGO, EduTech, and agency ecosystems.',
-  },
-  {
-    title: 'Team-ready engineering',
-    note: 'Focus on maintainability, velocity, and predictable execution.',
-  },
-];
-
-const SOCIAL_LINKS = [
+const SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/Nandita2002', Icon: FaGithub },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/nandita', Icon: FaLinkedin },
+  { label: 'Dribbble', href: 'https://dribbble.com/', Icon: FaDribbble },
 ];
 
 const reveal = {
-  hidden: { opacity: 0, y: 18 },
+  hidden: { opacity: 0, y: 22 },
   show: { opacity: 1, y: 0 },
 };
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#fbfdff] text-slate-900">
+    <main className="relative min-h-screen overflow-hidden bg-[#fcfefd] text-slate-900">
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-blue-300/40 blur-3xl"
-          animate={{ x: [0, 24, 0], y: [0, 18, 0] }}
-          transition={{ duration: 12, repeat: Infinity, repeatType: 'mirror' }}
-        />
-        <motion.div
-          className="absolute right-0 top-1/4 h-96 w-96 rounded-full bg-emerald-300/35 blur-3xl"
-          animate={{ x: [0, -30, 0], y: [0, -12, 0] }}
+          className="absolute -top-16 left-0 h-72 w-72 rounded-full bg-blue-300/35 blur-3xl"
+          animate={{ x: [0, 18, 0], y: [0, 16, 0] }}
           transition={{ duration: 14, repeat: Infinity, repeatType: 'mirror' }}
         />
-        <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,#d7ddf0_1px,transparent_1px),linear-gradient(to_bottom,#d7ddf0_1px,transparent_1px)] [background-size:34px_34px]" />
+        <motion.div
+          className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-emerald-300/35 blur-3xl"
+          animate={{ x: [0, -24, 0], y: [0, -14, 0] }}
+          transition={{ duration: 16, repeat: Infinity, repeatType: 'mirror' }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.06),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_35%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6 md:px-8">
-        <header className="sticky top-4 z-20 mb-8 rounded-2xl border border-white/60 bg-white/75 p-4 shadow-[0_12px_30px_rgba(37,99,235,0.12)] backdrop-blur-xl">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 font-semibold text-white shadow-md shadow-blue-300/50">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-10 pt-4 sm:px-6 sm:pt-6 md:px-8">
+        <header className="sticky top-3 z-30 rounded-2xl border border-white/80 bg-white/90 px-4 py-3 shadow-[0_12px_28px_rgba(37,99,235,0.14)] backdrop-blur md:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <a href="#home" className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-semibold text-white shadow-[0_8px_18px_rgba(37,99,235,0.24)]">
                 NM
               </div>
-              <div>
-                <p className="text-base font-semibold text-slate-900">{PROFILE.name}</p>
-                <p className="text-xs text-slate-500">{PROFILE.role}</p>
+              <div className="leading-tight">
+                <p className="text-sm font-semibold text-slate-900">{PROFILE.name}</p>
+                <p className="text-[11px] text-slate-500">{PROFILE.role}</p>
               </div>
-            </div>
-            <nav className="flex flex-wrap gap-2 text-xs">
-              {NAV_ITEMS.map((item) => (
+            </a>
+
+            <nav className="flex flex-wrap items-center justify-end gap-2 text-xs">
+              {NAV.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -187,43 +152,53 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
+        <section
+          id="home"
+          className="mt-6 grid gap-4 rounded-[2rem] border border-white/80 bg-white/85 p-4 shadow-[0_22px_42px_rgba(16,185,129,0.12)] backdrop-blur sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:p-8"
+        >
           <motion.article
             variants={reveal}
             initial="hidden"
             animate="show"
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_50px_rgba(37,99,235,0.16)] backdrop-blur-xl"
           >
             <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
-              <FaGamepad className="text-[10px]" />
-              Light Mode Edition 2026
+              <FaRegStar className="text-[10px]" />
+              Folio-style developer portfolio
             </p>
-            <h1 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-slate-900 md:text-5xl">
-              Premium developer portfolio with a game-inspired personality.
+            <h1 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              Creative frontend aesthetics. Reliable product engineering.
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
-              {PROFILE.tagline} I build polished user experiences, resilient APIs, and
-              production-ready systems with delivery discipline.
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+              {PROFILE.intro}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.24)] transition hover:from-emerald-400 hover:to-blue-500"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.25)] transition hover:from-emerald-400 hover:to-blue-500"
               >
-                Start a project
+                Hire me
                 <FaArrowRight className="text-xs" />
               </a>
               <a
-                href="https://github.com/Nandita2002"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-[0_8px_20px_rgba(16,185,129,0.15)] transition hover:border-blue-300 hover:text-blue-700"
+                href="#work"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-[0_8px_18px_rgba(16,185,129,0.13)] transition hover:border-blue-300 hover:text-blue-700"
               >
-                <FaGithub />
-                Open GitHub
+                Explore work
               </a>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
+              {STATS.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_8px_16px_rgba(37,99,235,0.08)]"
+                >
+                  <p className="text-lg font-semibold text-slate-900">{item.value}</p>
+                  <p className="text-xs text-slate-500">{item.label}</p>
+                </div>
+              ))}
             </div>
           </motion.article>
 
@@ -231,246 +206,139 @@ export default function Home() {
             variants={reveal}
             initial="hidden"
             animate="show"
-            transition={{ duration: 0.45, delay: 0.08, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(16,185,129,0.16)] backdrop-blur-xl"
+            transition={{ duration: 0.45, delay: 0.1, ease: 'easeOut' }}
+            className="rounded-3xl border border-slate-200 bg-[#f9fcff] p-5 shadow-[0_18px_34px_rgba(37,99,235,0.12)] sm:p-6"
           >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">
-                  Player card
-                </p>
-                <h2 className="mt-1 text-lg font-semibold text-slate-900">{PROFILE.name}</h2>
-              </div>
-              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700">
-                <FaCrown className="mr-1 inline" />
-                Elite Builder
-              </span>
+            <div className="rounded-2xl border border-blue-100 bg-white p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">Profile card</p>
+              <h2 className="mt-2 text-xl font-semibold text-slate-900">{PROFILE.name}</h2>
+              <p className="mt-1 text-sm text-slate-600">{PROFILE.role}</p>
+              <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-500">
+                <FaLocationArrow className="text-[11px] text-blue-600" />
+                {PROFILE.location}
+              </p>
             </div>
-            <p className="mt-3 flex items-center gap-2 text-sm text-slate-600">
-              <FaLocationArrow className="text-xs text-blue-600" />
-              {PROFILE.location}
-            </p>
-            <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-slate-100">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: '73%' }}
-                transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-                className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-blue-600"
-              />
-            </div>
-            <p className="mt-2 text-xs text-slate-500">XP progress to next level: 73%</p>
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              {PLAYER_STATS.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-xl border border-slate-200 bg-white p-2.5"
-                >
-                  <p className="text-base font-semibold text-slate-900">{stat.value}</p>
-                  <p className="text-[11px] text-slate-500">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </motion.aside>
-        </section>
 
-        <section className="mt-8 grid gap-4 xl:grid-cols-12">
-          <motion.article
-            id="projects"
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(37,99,235,0.16)] backdrop-blur-xl xl:col-span-7"
-          >
-            <SectionLabel icon={<FaRocket />} label="Quest Board" />
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
-              Featured missions shipped for real users.
-            </h3>
-            <div className="mt-5 space-y-3">
-              {PROJECTS.map((project) => (
-                <a
-                  key={project.title}
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-blue-300 hover:shadow-[0_10px_24px_rgba(37,99,235,0.2)]"
-                >
-                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-base font-semibold text-slate-900">{project.title}</p>
-                    <span className="rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700">
-                      {project.status}
-                    </span>
-                  </div>
-                  <p className="text-sm text-slate-600">{project.description}</p>
-                  <p className="mt-2 text-sm text-slate-500">{project.impact}</p>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {project.stack.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-[11px] text-emerald-700"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </a>
-              ))}
+            <div className="mt-4 rounded-2xl border border-emerald-100 bg-white p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-emerald-700">
+                Collaboration style
+              </p>
+              <p className="mt-2 text-sm text-slate-600">
+                Fast execution, clean communication, and production-focused decisions.
+              </p>
             </div>
-          </motion.article>
 
-          <motion.article
-            id="skills"
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(16,185,129,0.16)] backdrop-blur-xl xl:col-span-5"
-          >
-            <SectionLabel icon={<FaShieldAlt />} label="Skill Tree" />
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
-              Battle-tested engineering paths.
-            </h3>
-            <div className="mt-5 space-y-3">
-              {SKILL_PATHS.map((path) => (
-                <div
-                  key={path.title}
-                  className="rounded-2xl border border-slate-200 bg-white p-4"
-                >
-                  <div className="mb-2 flex items-center justify-between gap-2">
-                    <p className="text-sm font-semibold text-slate-900">{path.title}</p>
-                    <span className="text-[11px] font-medium text-blue-700">
-                      {path.level}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {path.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.article>
-
-          <motion.article
-            id="experience"
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(37,99,235,0.14)] backdrop-blur-xl xl:col-span-5"
-          >
-            <SectionLabel icon={<FaCodeBranch />} label="XP Log" />
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
-              Delivery style and execution timeline.
-            </h3>
-            <div className="mt-5 space-y-3">
-              {ACHIEVEMENTS.map((item) => (
-                <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                  <p className="mt-1 text-sm text-slate-600">{item.note}</p>
-                </div>
-              ))}
-            </div>
-          </motion.article>
-
-          <motion.article
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(16,185,129,0.14)] backdrop-blur-xl xl:col-span-7"
-          >
-            <SectionLabel icon={<FaTrophy />} label="Achievement Zone" />
-            <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
-              Why teams trust my gameplay in production.
-            </h3>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-                <p className="text-sm font-semibold text-emerald-900">High reliability</p>
-                <p className="mt-1 text-sm text-emerald-800">
-                  I optimize for maintainable systems and predictable delivery.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-                <p className="text-sm font-semibold text-blue-900">Product intuition</p>
-                <p className="mt-1 text-sm text-blue-800">
-                  I prioritize user journeys and feature value, not just code output.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-                <p className="text-sm font-semibold text-emerald-900">Execution speed</p>
-                <p className="mt-1 text-sm text-emerald-800">
-                  Strong rhythm from architecture to release with clean handoff.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
-                <p className="text-sm font-semibold text-blue-900">Team alignment</p>
-                <p className="mt-1 text-sm text-blue-800">
-                  Clear communication with clients and cross-functional stakeholders.
-                </p>
-              </div>
-            </div>
-          </motion.article>
-        </section>
-
-        <section id="contact" className="mt-8">
-          <motion.div
-            variants={reveal}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-emerald-50 p-6 shadow-[0_18px_40px_rgba(37,99,235,0.16)]"
-          >
-            <p className="text-xs uppercase tracking-[0.2em] text-blue-700">Final checkpoint</p>
-            <h3 className="mt-2 text-2xl font-semibold text-slate-900 md:text-3xl">
-              Ready to launch your next product mission?
-            </h3>
-            <p className="mt-3 max-w-2xl text-sm text-slate-600 md:text-base">
-              Send your product brief or role details. I can scope the work, build it cleanly,
-              and ship with high confidence.
-            </p>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
-              >
-                <FaEnvelope />
-                {PROFILE.email}
-              </a>
-              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {SOCIALS.map(({ label, href, Icon }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-[0_8px_18px_rgba(16,185,129,0.12)] transition hover:border-blue-300 hover:text-blue-700"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
                 >
-                  <Icon />
+                  <Icon className="text-[11px]" />
                   {label}
                 </a>
               ))}
             </div>
-          </motion.div>
+          </motion.aside>
         </section>
 
-        <footer className="mt-8 border-t border-slate-200 pt-5 text-xs text-slate-500">
+        <section id="work" className="mt-8">
+          <SectionHeading eyebrow="Selected work" title="Projects with polished UX and measurable outcomes" />
+          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {PROJECTS.map((project, idx) => (
+              <motion.a
+                key={project.title}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={reveal}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: '-70px' }}
+                transition={{ duration: 0.4, delay: idx * 0.06 }}
+                className="group rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_14px_30px_rgba(16,185,129,0.1)] transition hover:border-blue-300 hover:shadow-[0_18px_34px_rgba(37,99,235,0.18)]"
+              >
+                <p className="text-[11px] uppercase tracking-[0.16em] text-blue-700">{project.category}</p>
+                <h3 className="mt-2 text-lg font-semibold text-slate-900">{project.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{project.summary}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {project.stack.map((tool) => (
+                    <span
+                      key={tool}
+                      className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] text-emerald-700"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-blue-700">
+                  View project <FaArrowRight className="text-[10px] transition group-hover:translate-x-0.5" />
+                </span>
+              </motion.a>
+            ))}
+          </div>
+        </section>
+
+        <section id="services" className="mt-10">
+          <SectionHeading eyebrow="Services" title="How I can help your product team" />
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {SERVICES.map((service, idx) => (
+              <motion.article
+                key={service.title}
+                variants={reveal}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: '-70px' }}
+                transition={{ duration: 0.35, delay: idx * 0.06 }}
+                className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_12px_26px_rgba(37,99,235,0.1)]"
+              >
+                <h3 className="text-base font-semibold text-slate-900">{service.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{service.description}</p>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+
+        <section id="contact" className="mt-10 rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-emerald-50 p-5 shadow-[0_20px_40px_rgba(37,99,235,0.14)] sm:p-7">
+          <p className="text-xs uppercase tracking-[0.2em] text-blue-700">Contact</p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+            Let&apos;s craft your next standout digital product.
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-slate-600 sm:text-base">
+            Share your brief, design direction, or product goals. I can help transform ideas
+            into responsive, production-ready experiences.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a
+              href={`mailto:${PROFILE.email}`}
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
+            >
+              <FaEnvelope />
+              {PROFILE.email}
+            </a>
+            <a
+              href="https://github.com/Nandita2002"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
+            >
+              <FaGithub />
+              GitHub
+            </a>
+          </div>
+        </section>
+
+        <footer className="mt-8 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-xs text-slate-500 sm:px-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p>Designed by {PROFILE.name} in light-mode game aesthetic.</p>
+            <p>
+              Designed and developed by {PROFILE.name}.
+            </p>
             <p className="inline-flex items-center gap-1.5">
-              <FaCodeBranch className="text-[11px]" />
-              Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
+              <FaCodeBranch className="text-[10px]" />
+              Responsive folio-inspired layout built with Next.js and Framer Motion.
             </p>
           </div>
         </footer>
@@ -479,11 +347,13 @@ export default function Home() {
   );
 }
 
-function SectionLabel({ icon, label }: { icon: React.ReactNode; label: string }) {
+function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
-    <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-600">
-      <span className="text-blue-700">{icon}</span>
-      {label}
-    </p>
+    <div>
+      <p className="text-xs uppercase tracking-[0.2em] text-blue-700">{eyebrow}</p>
+      <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+        {title}
+      </h2>
+    </div>
   );
 }
