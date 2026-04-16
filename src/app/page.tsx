@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import {
   FaArrowRight,
+  FaBolt,
   FaCodeBranch,
   FaDribbble,
   FaEnvelope,
@@ -36,7 +37,7 @@ const PROFILE = {
   location: 'India',
   email: 'nanditam2029@gmail.com',
   intro:
-    'I build elegant digital experiences and robust web products with a clean UI style and product-focused engineering.',
+    'I design and engineer premium web products that blend visual craft, smooth motion, and dependable delivery.',
 };
 
 const NAV = [
@@ -57,7 +58,7 @@ const PROJECTS: Project[] = [
     title: 'Student Sync Platform',
     category: 'Dashboard Product',
     summary:
-      'A complete student lifecycle system with role-based dashboards, attendance workflows, and analytics.',
+      'Complete student lifecycle system with role-based dashboards, attendance workflows, and analytics.',
     stack: ['Next.js', 'MongoDB', 'NextAuth', 'Tailwind CSS'],
     link: 'https://github.com/Nandita2002/Student_Sync',
   },
@@ -65,7 +66,7 @@ const PROJECTS: Project[] = [
     title: 'Hands-on Seva NGO',
     category: 'Social Impact Web App',
     summary:
-      'A volunteer and campaign platform designed for clarity, easy updates, and team collaboration.',
+      'Volunteer and campaign platform designed for clarity, easy updates, and team collaboration.',
     stack: ['Next.js', 'MongoDB', 'Tailwind CSS'],
     link: 'https://github.com/Nandita2002/Hands-on-seva-An-NGO',
   },
@@ -73,7 +74,7 @@ const PROJECTS: Project[] = [
     title: 'Certificate Generator',
     category: 'Automation Tool',
     summary:
-      'A template-based certificate generation system with dynamic QR verification and export flow.',
+      'Template-based certificate generation system with dynamic QR verification and export flow.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     link: 'https://github.com/Nandita2002/certificate-generator',
   },
@@ -83,7 +84,7 @@ const SERVICES: Service[] = [
   {
     title: 'Product UI Engineering',
     description:
-      'Responsive frontend development with polished interface details and performance-conscious builds.',
+      'Responsive frontend development with polished interface details and smooth interactions.',
   },
   {
     title: 'Full-stack Delivery',
@@ -93,7 +94,7 @@ const SERVICES: Service[] = [
   {
     title: 'Execution & Coordination',
     description:
-      'Clear communication with stakeholders and predictable release cycles for real business outcomes.',
+      'Clear communication with stakeholders and predictable release cycles for business outcomes.',
   },
 ];
 
@@ -103,9 +104,17 @@ const SOCIALS = [
   { label: 'Dribbble', href: 'https://dribbble.com/', Icon: FaDribbble },
 ];
 
-const reveal = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0 },
+const container: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 22, scale: 0.98 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } },
 };
 
 export default function Home() {
@@ -113,25 +122,38 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden bg-[#fcfefd] text-slate-900">
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-16 left-0 h-72 w-72 rounded-full bg-blue-300/35 blur-3xl"
-          animate={{ x: [0, 18, 0], y: [0, 16, 0] }}
-          transition={{ duration: 14, repeat: Infinity, repeatType: 'mirror' }}
-        />
-        <motion.div
-          className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-emerald-300/35 blur-3xl"
-          animate={{ x: [0, -24, 0], y: [0, -14, 0] }}
+          className="absolute -top-16 left-0 h-72 w-72 rounded-full bg-blue-300/30 blur-3xl"
+          animate={{ x: [0, 30, 0], y: [0, 20, 0], scale: [1, 1.08, 1] }}
           transition={{ duration: 16, repeat: Infinity, repeatType: 'mirror' }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.06),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_35%)]" />
+        <motion.div
+          className="absolute right-0 top-1/4 h-80 w-80 rounded-full bg-emerald-300/30 blur-3xl"
+          animate={{ x: [0, -28, 0], y: [0, -18, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror' }}
+        />
+        <motion.div
+          className="absolute bottom-8 left-1/2 h-52 w-52 -translate-x-1/2 rounded-full bg-blue-200/30 blur-3xl"
+          animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 14, repeat: Infinity, repeatType: 'mirror' }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.07),transparent_45%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.08),transparent_35%)]" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-10 pt-4 sm:px-6 sm:pt-6 md:px-8">
-        <header className="sticky top-3 z-30 rounded-2xl border border-white/80 bg-white/90 px-4 py-3 shadow-[0_12px_28px_rgba(37,99,235,0.14)] backdrop-blur md:px-6">
+        <motion.header
+          initial={{ opacity: 0, y: -18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="sticky top-3 z-30 rounded-2xl border border-white/80 bg-white/85 px-4 py-3 shadow-[0_14px_30px_rgba(37,99,235,0.14)] backdrop-blur-xl md:px-6"
+        >
           <div className="flex flex-wrap items-center justify-between gap-3">
             <a href="#home" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-semibold text-white shadow-[0_8px_18px_rgba(37,99,235,0.24)]">
+              <motion.div
+                whileHover={{ rotate: 6, scale: 1.05 }}
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(37,99,235,0.24)]"
+              >
                 NM
-              </div>
+              </motion.div>
               <div className="leading-tight">
                 <p className="text-sm font-semibold text-slate-900">{PROFILE.name}</p>
                 <p className="text-[11px] text-slate-500">{PROFILE.role}</p>
@@ -139,77 +161,99 @@ export default function Home() {
             </a>
 
             <nav className="flex flex-wrap items-center justify-end gap-2 text-xs">
-              {NAV.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
+              {NAV.map((itemNav) => (
+                <motion.a
+                  key={itemNav.href}
+                  href={itemNav.href}
+                  whileHover={{ y: -2 }}
                   className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-slate-600 transition hover:border-blue-300 hover:text-blue-700"
                 >
-                  {item.label}
-                </a>
+                  {itemNav.label}
+                </motion.a>
               ))}
             </nav>
           </div>
-        </header>
+        </motion.header>
 
-        <section
+        <motion.section
           id="home"
-          className="mt-6 grid gap-4 rounded-[2rem] border border-white/80 bg-white/85 p-4 shadow-[0_22px_42px_rgba(16,185,129,0.12)] backdrop-blur sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:p-8"
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="mt-6 grid gap-4 rounded-[2rem] border border-white/80 bg-white/80 p-4 shadow-[0_24px_45px_rgba(16,185,129,0.12)] backdrop-blur-xl sm:p-6 lg:grid-cols-[1.15fr_0.85fr] lg:p-8"
         >
-          <motion.article
-            variants={reveal}
-            initial="hidden"
-            animate="show"
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-          >
-            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
+          <motion.article variants={item}>
+            <motion.p
+              whileHover={{ scale: 1.03 }}
+              className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700"
+            >
               <FaRegStar className="text-[10px]" />
-              Folio-style developer portfolio
-            </p>
+              Animated folio-style developer portfolio
+            </motion.p>
             <h1 className="mt-4 max-w-xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
-              Creative frontend aesthetics. Reliable product engineering.
+              Creative visual systems. Smooth interactions. Strong execution.
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
               {PROFILE.intro}
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
+              <motion.a
                 href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.25)] transition hover:from-emerald-400 hover:to-blue-500"
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(37,99,235,0.28)] transition hover:from-emerald-400 hover:to-blue-500"
               >
                 Hire me
-                <FaArrowRight className="text-xs" />
-              </a>
-              <a
+                <motion.span
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.8, repeat: Infinity, repeatType: 'mirror' }}
+                >
+                  <FaArrowRight className="text-xs" />
+                </motion.span>
+              </motion.a>
+              <motion.a
                 href="#work"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-[0_8px_18px_rgba(16,185,129,0.13)] transition hover:border-blue-300 hover:text-blue-700"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-[0_9px_19px_rgba(16,185,129,0.13)] transition hover:border-blue-300 hover:text-blue-700"
               >
                 Explore work
-              </a>
+              </motion.a>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
-              {STATS.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_8px_16px_rgba(37,99,235,0.08)]"
+            <motion.div variants={container} className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
+              {STATS.map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  variants={item}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="rounded-2xl border border-slate-200 bg-white p-3 shadow-[0_8px_16px_rgba(37,99,235,0.09)]"
                 >
-                  <p className="text-lg font-semibold text-slate-900">{item.value}</p>
-                  <p className="text-xs text-slate-500">{item.label}</p>
-                </div>
+                  <p className="text-lg font-semibold text-slate-900">{stat.value}</p>
+                  <p className="text-xs text-slate-500">{stat.label}</p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.article>
 
           <motion.aside
-            variants={reveal}
-            initial="hidden"
-            animate="show"
-            transition={{ duration: 0.45, delay: 0.1, ease: 'easeOut' }}
-            className="rounded-3xl border border-slate-200 bg-[#f9fcff] p-5 shadow-[0_18px_34px_rgba(37,99,235,0.12)] sm:p-6"
+            variants={item}
+            whileHover={{ y: -4 }}
+            className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#f9fcff] p-5 shadow-[0_20px_36px_rgba(37,99,235,0.14)] sm:p-6"
           >
-            <div className="rounded-2xl border border-blue-100 bg-white p-4">
+            <motion.div
+              className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-blue-200/60 blur-2xl"
+              animate={{ scale: [1, 1.15, 1], opacity: [0.45, 0.7, 0.45] }}
+              transition={{ duration: 6, repeat: Infinity }}
+            />
+            <motion.div
+              className="absolute -bottom-8 -left-8 h-24 w-24 rounded-full bg-emerald-200/60 blur-2xl"
+              animate={{ scale: [1, 1.12, 1], opacity: [0.4, 0.65, 0.4] }}
+              transition={{ duration: 6.8, repeat: Infinity }}
+            />
+
+            <div className="relative rounded-2xl border border-blue-100 bg-white p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-slate-500">Profile card</p>
               <h2 className="mt-2 text-xl font-semibold text-slate-900">{PROFILE.name}</h2>
               <p className="mt-1 text-sm text-slate-600">{PROFILE.role}</p>
@@ -219,8 +263,9 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-4 rounded-2xl border border-emerald-100 bg-white p-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-emerald-700">
+            <div className="relative mt-4 rounded-2xl border border-emerald-100 bg-white p-4">
+              <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-emerald-700">
+                <FaBolt className="text-[10px]" />
                 Collaboration style
               </p>
               <p className="mt-2 text-sm text-slate-600">
@@ -228,38 +273,46 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="relative mt-4 flex flex-wrap gap-2">
               {SOCIALS.map(({ label, href, Icon }) => (
-                <a
+                <motion.a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
                 >
                   <Icon className="text-[11px]" />
                   {label}
-                </a>
+                </motion.a>
               ))}
             </div>
           </motion.aside>
-        </section>
+        </motion.section>
 
         <section id="work" className="mt-8">
-          <SectionHeading eyebrow="Selected work" title="Projects with polished UX and measurable outcomes" />
-          <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {PROJECTS.map((project, idx) => (
+          <SectionHeading
+            eyebrow="Selected work"
+            title="Projects with premium visuals and measurable outcomes"
+          />
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-70px' }}
+            className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
+            {PROJECTS.map((project) => (
               <motion.a
                 key={project.title}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                variants={reveal}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: '-70px' }}
-                transition={{ duration: 0.4, delay: idx * 0.06 }}
-                className="group rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_14px_30px_rgba(16,185,129,0.1)] transition hover:border-blue-300 hover:shadow-[0_18px_34px_rgba(37,99,235,0.18)]"
+                variants={item}
+                whileHover={{ y: -6 }}
+                className="group rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_14px_30px_rgba(16,185,129,0.1)] transition hover:border-blue-300 hover:shadow-[0_20px_36px_rgba(37,99,235,0.2)]"
               >
                 <p className="text-[11px] uppercase tracking-[0.16em] text-blue-700">{project.category}</p>
                 <h3 className="mt-2 text-lg font-semibold text-slate-900">{project.title}</h3>
@@ -274,35 +327,48 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-blue-700">
-                  View project <FaArrowRight className="text-[10px] transition group-hover:translate-x-0.5" />
-                </span>
+                <motion.span
+                  className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-blue-700"
+                  whileHover={{ x: 2 }}
+                >
+                  View project <FaArrowRight className="text-[10px]" />
+                </motion.span>
               </motion.a>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         <section id="services" className="mt-10">
           <SectionHeading eyebrow="Services" title="How I can help your product team" />
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {SERVICES.map((service, idx) => (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-70px' }}
+            className="mt-4 grid gap-4 md:grid-cols-3"
+          >
+            {SERVICES.map((service) => (
               <motion.article
                 key={service.title}
-                variants={reveal}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: '-70px' }}
-                transition={{ duration: 0.35, delay: idx * 0.06 }}
+                variants={item}
+                whileHover={{ y: -4 }}
                 className="rounded-3xl border border-slate-200 bg-white p-5 shadow-[0_12px_26px_rgba(37,99,235,0.1)]"
               >
                 <h3 className="text-base font-semibold text-slate-900">{service.title}</h3>
                 <p className="mt-2 text-sm text-slate-600">{service.description}</p>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </section>
 
-        <section id="contact" className="mt-10 rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-emerald-50 p-5 shadow-[0_20px_40px_rgba(37,99,235,0.14)] sm:p-7">
+        <motion.section
+          id="contact"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="mt-10 rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-emerald-50 p-5 shadow-[0_22px_42px_rgba(37,99,235,0.16)] sm:p-7"
+        >
           <p className="text-xs uppercase tracking-[0.2em] text-blue-700">Contact</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
             Let&apos;s craft your next standout digital product.
@@ -312,33 +378,35 @@ export default function Home() {
             into responsive, production-ready experiences.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <a
+            <motion.a
               href={`mailto:${PROFILE.email}`}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
             >
               <FaEnvelope />
               {PROFILE.email}
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="https://github.com/Nandita2002"
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
             >
               <FaGithub />
               GitHub
-            </a>
+            </motion.a>
           </div>
-        </section>
+        </motion.section>
 
         <footer className="mt-8 rounded-2xl border border-slate-200 bg-white px-4 py-4 text-xs text-slate-500 sm:px-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p>
-              Designed and developed by {PROFILE.name}.
-            </p>
+            <p>Designed and developed by {PROFILE.name}.</p>
             <p className="inline-flex items-center gap-1.5">
               <FaCodeBranch className="text-[10px]" />
-              Responsive folio-inspired layout built with Next.js and Framer Motion.
+              Motion-rich folio-style layout built with Next.js and Framer Motion.
             </p>
           </div>
         </footer>
