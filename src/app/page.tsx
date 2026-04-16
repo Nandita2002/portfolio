@@ -1,6 +1,8 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
+import { useRef } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
+import { motion, type Variants, useMotionValue, useSpring } from 'framer-motion';
 import {
   FaArrowRight,
   FaBolt,
@@ -102,6 +104,17 @@ const SOCIALS = [
   { label: 'GitHub', href: 'https://github.com/Nandita2002', Icon: FaGithub },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/nandita', Icon: FaLinkedin },
   { label: 'Dribbble', href: 'https://dribbble.com/', Icon: FaDribbble },
+];
+
+const HERO_SKILLS = [
+  'Next.js',
+  'TypeScript',
+  'Framer Motion',
+  'Design Systems',
+  'API Design',
+  'MongoDB',
+  'UI Engineering',
+  'Delivery Management',
 ];
 
 const container: Variants = {
@@ -222,6 +235,8 @@ export default function Home() {
               </motion.a>
             </div>
 
+            <SkillsMarquee />
+
             <motion.div variants={container} className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
               {STATS.map((stat) => (
                 <motion.div
@@ -237,59 +252,7 @@ export default function Home() {
             </motion.div>
           </motion.article>
 
-          <motion.aside
-            variants={item}
-            whileHover={{ y: -4 }}
-            className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#f9fcff] p-5 shadow-[0_20px_36px_rgba(37,99,235,0.14)] sm:p-6"
-          >
-            <motion.div
-              className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-blue-200/60 blur-2xl"
-              animate={{ scale: [1, 1.15, 1], opacity: [0.45, 0.7, 0.45] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute -bottom-8 -left-8 h-24 w-24 rounded-full bg-emerald-200/60 blur-2xl"
-              animate={{ scale: [1, 1.12, 1], opacity: [0.4, 0.65, 0.4] }}
-              transition={{ duration: 6.8, repeat: Infinity }}
-            />
-
-            <div className="relative rounded-2xl border border-blue-100 bg-white p-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-500">Profile card</p>
-              <h2 className="mt-2 text-xl font-semibold text-slate-900">{PROFILE.name}</h2>
-              <p className="mt-1 text-sm text-slate-600">{PROFILE.role}</p>
-              <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-500">
-                <FaLocationArrow className="text-[11px] text-blue-600" />
-                {PROFILE.location}
-              </p>
-            </div>
-
-            <div className="relative mt-4 rounded-2xl border border-emerald-100 bg-white p-4">
-              <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-emerald-700">
-                <FaBolt className="text-[10px]" />
-                Collaboration style
-              </p>
-              <p className="mt-2 text-sm text-slate-600">
-                Fast execution, clean communication, and production-focused decisions.
-              </p>
-            </div>
-
-            <div className="relative mt-4 flex flex-wrap gap-2">
-              {SOCIALS.map(({ label, href, Icon }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
-                >
-                  <Icon className="text-[11px]" />
-                  {label}
-                </motion.a>
-              ))}
-            </div>
-          </motion.aside>
+          <ParallaxHeroCard variants={item} />
         </motion.section>
 
         <section id="work" className="mt-8">
@@ -412,6 +375,148 @@ export default function Home() {
         </footer>
       </div>
     </main>
+  );
+}
+
+function ParallaxHeroCard({ variants }: { variants: Variants }) {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springRotateX = useSpring(rotateX, { stiffness: 150, damping: 18, mass: 0.6 });
+  const springRotateY = useSpring(rotateY, { stiffness: 150, damping: 18, mass: 0.6 });
+
+  const handleMouseMove = (event: ReactMouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (event.clientX - rect.left) / rect.width;
+    const py = (event.clientY - rect.top) / rect.height;
+    rotateY.set((px - 0.5) * 14);
+    rotateX.set((0.5 - py) * 14);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  return (
+    <motion.aside
+      variants={variants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative rounded-3xl border border-slate-200 bg-[#f9fcff] p-5 shadow-[0_20px_36px_rgba(37,99,235,0.14)] sm:p-6"
+      style={{
+        rotateX: springRotateX,
+        rotateY: springRotateY,
+        transformPerspective: 900,
+        transformStyle: 'preserve-3d',
+      }}
+      ref={cardRef}
+    >
+      <motion.div
+        className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-blue-200/60 blur-2xl"
+        animate={{ scale: [1, 1.14, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 5.8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-emerald-200/60 blur-2xl"
+        animate={{ scale: [1, 1.14, 1], opacity: [0.4, 0.68, 0.4] }}
+        transition={{ duration: 6.2, repeat: Infinity }}
+      />
+
+      <div className="relative space-y-4 [transform:translateZ(24px)]">
+        <AvatarOrbitalFrame />
+
+        <div className="rounded-2xl border border-blue-100 bg-white p-4">
+          <h2 className="text-xl font-semibold text-slate-900">{PROFILE.name}</h2>
+          <p className="mt-1 text-sm text-slate-600">{PROFILE.role}</p>
+          <p className="mt-3 inline-flex items-center gap-2 text-sm text-slate-500">
+            <FaLocationArrow className="text-[11px] text-blue-600" />
+            {PROFILE.location}
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-emerald-100 bg-white p-4">
+          <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-emerald-700">
+            <FaBolt className="text-[10px]" />
+            Collaboration style
+          </p>
+          <p className="mt-2 text-sm text-slate-600">
+            Fast execution, clean communication, and production-focused decisions.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {SOCIALS.map(({ label, href, Icon }) => (
+            <motion.a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-blue-300 hover:text-blue-700"
+            >
+              <Icon className="text-[11px]" />
+              {label}
+            </motion.a>
+          ))}
+        </div>
+      </div>
+    </motion.aside>
+  );
+}
+
+function AvatarOrbitalFrame() {
+  return (
+    <div className="relative mx-auto flex h-36 w-36 items-center justify-center rounded-full">
+      <motion.div
+        className="absolute inset-0 rounded-full border-2 border-blue-200"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
+        className="absolute inset-2 rounded-full border-2 border-emerald-200"
+        animate={{ rotate: -360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
+        className="absolute top-2 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-blue-500 shadow-[0_0_16px_rgba(37,99,235,0.6)]"
+        animate={{ scale: [1, 1.25, 1] }}
+        transition={{ duration: 1.8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-2 left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-emerald-500 shadow-[0_0_16px_rgba(16,185,129,0.6)]"
+        animate={{ scale: [1, 1.25, 1] }}
+        transition={{ duration: 1.8, delay: 0.9, repeat: Infinity }}
+      />
+      <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-blue-600 text-2xl font-semibold text-white shadow-[0_14px_24px_rgba(37,99,235,0.3)]">
+        NM
+      </div>
+    </div>
+  );
+}
+
+function SkillsMarquee() {
+  const items = [...HERO_SKILLS, ...HERO_SKILLS];
+
+  return (
+    <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white/90 py-2">
+      <motion.div
+        className="flex w-max gap-2 px-2"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      >
+        {items.map((skill, index) => (
+          <span
+            key={`${skill}-${index}`}
+            className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700"
+          >
+            {skill}
+          </span>
+        ))}
+      </motion.div>
+    </div>
   );
 }
 
