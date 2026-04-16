@@ -146,15 +146,15 @@ const reveal = {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#f6f8ff] text-slate-900">
+    <main className="relative min-h-screen overflow-hidden bg-[#fbfdff] text-slate-900">
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-cyan-300/40 blur-3xl"
+          className="absolute -top-24 left-0 h-72 w-72 rounded-full bg-blue-300/40 blur-3xl"
           animate={{ x: [0, 24, 0], y: [0, 18, 0] }}
           transition={{ duration: 12, repeat: Infinity, repeatType: 'mirror' }}
         />
         <motion.div
-          className="absolute right-0 top-1/4 h-96 w-96 rounded-full bg-fuchsia-300/40 blur-3xl"
+          className="absolute right-0 top-1/4 h-96 w-96 rounded-full bg-emerald-300/35 blur-3xl"
           animate={{ x: [0, -30, 0], y: [0, -12, 0] }}
           transition={{ duration: 14, repeat: Infinity, repeatType: 'mirror' }}
         />
@@ -162,10 +162,10 @@ export default function Home() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6 md:px-8">
-        <header className="sticky top-4 z-20 mb-8 rounded-2xl border border-white/60 bg-white/65 p-4 shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+        <header className="sticky top-4 z-20 mb-8 rounded-2xl border border-white/60 bg-white/75 p-4 shadow-[0_12px_30px_rgba(37,99,235,0.12)] backdrop-blur-xl">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 font-semibold text-white shadow-md shadow-cyan-300/50">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 font-semibold text-white shadow-md shadow-blue-300/50">
                 NM
               </div>
               <div>
@@ -178,7 +178,7 @@ export default function Home() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-slate-600 transition hover:border-cyan-300 hover:text-cyan-700"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-slate-600 transition hover:border-blue-300 hover:text-blue-700"
                 >
                   {item.label}
                 </a>
@@ -193,9 +193,9 @@ export default function Home() {
             initial="hidden"
             animate="show"
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_15px_50px_rgba(59,130,246,0.13)] backdrop-blur-xl"
+            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_50px_rgba(37,99,235,0.16)] backdrop-blur-xl"
           >
-            <p className="inline-flex items-center gap-2 rounded-full border border-fuchsia-200 bg-fuchsia-50 px-3 py-1 text-[11px] font-medium text-fuchsia-700">
+            <p className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-medium text-blue-700">
               <FaGamepad className="text-[10px]" />
               Light Mode Edition 2026
             </p>
@@ -210,7 +210,7 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href={`mailto:${PROFILE.email}`}
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:from-cyan-400 hover:to-blue-500"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(37,99,235,0.24)] transition hover:from-emerald-400 hover:to-blue-500"
               >
                 Start a project
                 <FaArrowRight className="text-xs" />
@@ -219,7 +219,7 @@ export default function Home() {
                 href="https://github.com/Nandita2002"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-cyan-300 hover:text-cyan-700"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-[0_8px_20px_rgba(16,185,129,0.15)] transition hover:border-blue-300 hover:text-blue-700"
               >
                 <FaGithub />
                 Open GitHub
@@ -232,7 +232,7 @@ export default function Home() {
             initial="hidden"
             animate="show"
             transition={{ duration: 0.45, delay: 0.08, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_15px_45px_rgba(168,85,247,0.14)] backdrop-blur-xl"
+            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(16,185,129,0.16)] backdrop-blur-xl"
           >
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -241,13 +241,13 @@ export default function Home() {
                 </p>
                 <h2 className="mt-1 text-lg font-semibold text-slate-900">{PROFILE.name}</h2>
               </div>
-              <span className="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium text-amber-700">
+              <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700">
                 <FaCrown className="mr-1 inline" />
                 Elite Builder
               </span>
             </div>
             <p className="mt-3 flex items-center gap-2 text-sm text-slate-600">
-              <FaLocationArrow className="text-xs text-cyan-600" />
+              <FaLocationArrow className="text-xs text-blue-600" />
               {PROFILE.location}
             </p>
             <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-slate-100">
@@ -255,7 +255,7 @@ export default function Home() {
                 initial={{ width: 0 }}
                 animate={{ width: '73%' }}
                 transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
-                className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600"
+                className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-blue-600"
               />
             </div>
             <p className="mt-2 text-xs text-slate-500">XP progress to next level: 73%</p>
@@ -281,7 +281,7 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_15px_45px_rgba(59,130,246,0.12)] backdrop-blur-xl xl:col-span-7"
+            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(37,99,235,0.16)] backdrop-blur-xl xl:col-span-7"
           >
             <SectionLabel icon={<FaRocket />} label="Quest Board" />
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
@@ -294,11 +294,11 @@ export default function Home() {
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-cyan-300 hover:shadow-[0_10px_24px_rgba(14,116,144,0.15)]"
+                  className="block rounded-2xl border border-slate-200 bg-white p-4 transition hover:border-blue-300 hover:shadow-[0_10px_24px_rgba(37,99,235,0.2)]"
                 >
                   <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                     <p className="text-base font-semibold text-slate-900">{project.title}</p>
-                    <span className="rounded-full border border-fuchsia-200 bg-fuchsia-50 px-2 py-0.5 text-[10px] font-medium text-fuchsia-700">
+                    <span className="rounded-full border border-blue-200 bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700">
                       {project.status}
                     </span>
                   </div>
@@ -308,7 +308,7 @@ export default function Home() {
                     {project.stack.map((item) => (
                       <span
                         key={item}
-                        className="rounded-full border border-cyan-200 bg-cyan-50 px-2 py-1 text-[11px] text-cyan-700"
+                        className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-[11px] text-emerald-700"
                       >
                         {item}
                       </span>
@@ -326,7 +326,7 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-            className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_15px_45px_rgba(14,165,233,0.12)] backdrop-blur-xl xl:col-span-5"
+            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(16,185,129,0.16)] backdrop-blur-xl xl:col-span-5"
           >
             <SectionLabel icon={<FaShieldAlt />} label="Skill Tree" />
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
@@ -340,7 +340,7 @@ export default function Home() {
                 >
                   <div className="mb-2 flex items-center justify-between gap-2">
                     <p className="text-sm font-semibold text-slate-900">{path.title}</p>
-                    <span className="text-[11px] font-medium text-cyan-700">
+                    <span className="text-[11px] font-medium text-blue-700">
                       {path.level}
                     </span>
                   </div>
@@ -366,7 +366,7 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_15px_45px_rgba(99,102,241,0.12)] backdrop-blur-xl xl:col-span-5"
+            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(37,99,235,0.14)] backdrop-blur-xl xl:col-span-5"
           >
             <SectionLabel icon={<FaCodeBranch />} label="XP Log" />
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
@@ -388,7 +388,7 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-            className="rounded-3xl border border-white/70 bg-white/70 p-6 shadow-[0_15px_45px_rgba(217,70,239,0.12)] backdrop-blur-xl xl:col-span-7"
+            className="rounded-3xl border border-white/70 bg-white/75 p-6 shadow-[0_15px_45px_rgba(16,185,129,0.14)] backdrop-blur-xl xl:col-span-7"
           >
             <SectionLabel icon={<FaTrophy />} label="Achievement Zone" />
             <h3 className="mt-3 text-2xl font-semibold tracking-tight text-slate-900">
@@ -401,21 +401,21 @@ export default function Home() {
                   I optimize for maintainable systems and predictable delivery.
                 </p>
               </div>
-              <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
-                <p className="text-sm font-semibold text-cyan-900">Product intuition</p>
-                <p className="mt-1 text-sm text-cyan-800">
+              <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+                <p className="text-sm font-semibold text-blue-900">Product intuition</p>
+                <p className="mt-1 text-sm text-blue-800">
                   I prioritize user journeys and feature value, not just code output.
                 </p>
               </div>
-              <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
-                <p className="text-sm font-semibold text-violet-900">Execution speed</p>
-                <p className="mt-1 text-sm text-violet-800">
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                <p className="text-sm font-semibold text-emerald-900">Execution speed</p>
+                <p className="mt-1 text-sm text-emerald-800">
                   Strong rhythm from architecture to release with clean handoff.
                 </p>
               </div>
-              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                <p className="text-sm font-semibold text-amber-900">Team alignment</p>
-                <p className="mt-1 text-sm text-amber-800">
+              <div className="rounded-2xl border border-blue-200 bg-blue-50 p-4">
+                <p className="text-sm font-semibold text-blue-900">Team alignment</p>
+                <p className="mt-1 text-sm text-blue-800">
                   Clear communication with clients and cross-functional stakeholders.
                 </p>
               </div>
@@ -430,9 +430,9 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="rounded-3xl border border-cyan-200 bg-gradient-to-r from-cyan-50 via-white to-violet-50 p-6 shadow-[0_18px_40px_rgba(14,116,144,0.14)]"
+            className="rounded-3xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-emerald-50 p-6 shadow-[0_18px_40px_rgba(37,99,235,0.16)]"
           >
-            <p className="text-xs uppercase tracking-[0.2em] text-cyan-700">Final checkpoint</p>
+            <p className="text-xs uppercase tracking-[0.2em] text-blue-700">Final checkpoint</p>
             <h3 className="mt-2 text-2xl font-semibold text-slate-900 md:text-3xl">
               Ready to launch your next product mission?
             </h3>
@@ -455,7 +455,7 @@ export default function Home() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyan-300 hover:text-cyan-700"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-[0_8px_18px_rgba(16,185,129,0.12)] transition hover:border-blue-300 hover:text-blue-700"
                 >
                   <Icon />
                   {label}
@@ -482,7 +482,7 @@ export default function Home() {
 function SectionLabel({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
     <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-slate-600">
-      <span className="text-cyan-700">{icon}</span>
+      <span className="text-blue-700">{icon}</span>
       {label}
     </p>
   );
