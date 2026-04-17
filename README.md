@@ -13,6 +13,24 @@ LINKEDIN_ARTICLES_FEED_URL=https://your-feed-url.xml
 2. If feed data is unavailable, fallback links from `src/lib/portfolio-data.ts` are shown.
 3. When you publish a new LinkedIn article and your feed updates, the site will show it automatically (revalidated periodically on the server).
 
+## Contact Form Data Collection
+
+The contact form now submits to `POST /api/contact` and stores submissions server-side.
+
+1. By default, submissions are stored at:
+
+```bash
+/tmp/portfolio-contact-submissions.json
+```
+
+2. To customize the storage file location, set:
+
+```bash
+CONTACT_STORAGE_PATH=./data/contact-submissions.json
+```
+
+The API validates name/email/message before saving each submission.
+
 ## Getting Started
 
 First, run the development server:
