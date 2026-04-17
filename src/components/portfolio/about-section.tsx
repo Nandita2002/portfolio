@@ -12,21 +12,21 @@ import { fadeInUp, smoothTransition, staggerContainer } from "@/styles/animation
 
 const highlights = [
   {
-    title: "Web Developer",
+    title: "Associate Software Developer",
     description:
-      "Building scalable interfaces and backend-integrated products with modern React and Next.js architecture.",
+      "Building scalable full-stack products with Next.js, React, TypeScript, Firebase, and MongoDB.",
     icon: BriefcaseBusiness,
   },
   {
-    title: "CTO at SocialGradeup",
+    title: "Delivery Manager",
     description:
-      "Leading product engineering, delivery systems, and innovation roadmaps for startup and agency clients.",
+      "Driving product delivery, release planning, and cross-team execution with measurable deployment outcomes.",
     icon: Building2,
   },
   {
     title: "NGO Impact Work",
     description:
-      "Designing and shipping mission-first platforms that improve community outreach and operational clarity.",
+      "Contributing to community-focused initiatives through awareness campaigns and rural education support.",
     icon: HandHeart,
   },
 ];
@@ -37,7 +37,7 @@ export function AboutSection() {
       <Container>
         <SectionHeading
           eyebrow="About"
-          title="Product-minded engineering with leadership and social impact."
+          title="Full-stack execution, AI-powered innovation, and delivery ownership."
           description={profile.summary}
         />
 

@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Nandita Mahesh Portfolio",
-  title: "Nandita Mahesh | Software Developer & CTO",
+  title: "Nandita Mahesh | Associate Software Developer",
   description:
-    "Modern portfolio of Nandita Mahesh, Software Developer and CTO at SocialGradeup, showcasing projects, experience, and services.",
+    "Portfolio of Nandita Mahesh, Associate Software Developer and Delivery Manager, showcasing full-stack and AI-powered product work.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nanditamahesh.dev",
   ogImage: "/profilepic.jpg",
 };
@@ -11,11 +11,11 @@ export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Nandita Mahesh",
-  jobTitle: "Software Developer / CTO",
+  jobTitle: "Associate Software Developer & Delivery Manager",
   worksFor: {
     "@type": "Organization",
-    name: "SocialGradeup",
+    name: "Cordito",
   },
-  sameAs: ["https://linkedin.com/in/nandita", "https://github.com/Nandita2002"],
+  sameAs: ["https://www.linkedin.com/in/nandita-mahesh", "https://github.com/Nandita2002"],
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nanditamahesh.dev",
 };

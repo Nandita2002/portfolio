@@ -141,12 +141,17 @@ export function ContactSection() {
             <div>
               <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Contact Details</h3>
               <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
-                Based in {profile.location}. Best for product builds, premium portfolio websites, and SEO-driven web
-                growth projects.
+                Based in {profile.location}. Open to software development, product engineering, AI workflow automation,
+                and delivery-focused roles.
               </p>
             </div>
 
             <div className="space-y-3 text-sm">
+              {profile.phone ? (
+                <div className="block rounded-2xl border border-slate-200 bg-white px-4 py-3 font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-200">
+                  {profile.phone}
+                </div>
+              ) : null}
               <a
                 href={`mailto:${profile.email}`}
                 className="block rounded-2xl border border-slate-200 bg-white px-4 py-3 font-medium text-slate-700 transition hover:border-emerald-300 hover:text-emerald-700 dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-200 dark:hover:border-emerald-500/40 dark:hover:text-emerald-300"

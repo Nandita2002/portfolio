@@ -11,14 +11,17 @@ import type {
 
 export const profile = {
   name: "Nandita Mahesh",
-  role: "Software Developer / CTO",
+  role: "Associate Software Developer & Delivery Manager",
   tagline:
-    "Crafting conversion-focused products with smooth UX, clean architecture, and measurable impact.",
-  company: "SocialGradeup",
-  location: "India",
+    "Building scalable full-stack and AI-powered products with strong execution, clean architecture, and measurable outcomes.",
+  company: "Cordito",
+  location: "Bangalore, Karnataka, India",
   email: "nanditam2029@gmail.com",
+  phone: "+91 6361589943",
+  linkedin: "https://www.linkedin.com/in/nandita-mahesh",
+  github: "https://github.com/Nandita2002",
   summary:
-    "I build high-performance web experiences from idea to deployment. Alongside development, I lead teams, delivery, and product strategy as CTO at SocialGradeup.",
+    "Associate Software Developer and Delivery Manager with hands-on experience in full-stack and AI-driven development. Skilled in Next.js, React.js, TypeScript, Firebase, MongoDB, and AI tools such as OpenAI APIs, LangChain, Hugging Face, and TensorFlow Lite. Currently pursuing an MBA in Business Intelligence and Analytics.",
 };
 
 export const navItems: NavItem[] = [
@@ -33,163 +36,197 @@ export const navItems: NavItem[] = [
 ];
 
 export const stats: Stat[] = [
-  { label: "Projects Delivered", value: "45+", description: "Web platforms and products" },
-  { label: "Years Experience", value: "4+", description: "Shipping for startups and agencies" },
-  { label: "Happy Clients", value: "30+", description: "Across multiple domains" },
+  { label: "Release Efficiency", value: "+20%", description: "Improved at Cordito through deployment optimization" },
+  { label: "Performance Gain", value: "+15%", description: "Reduced page load time at Novel Sky Technologies" },
+  { label: "Production Deployments", value: "10+ ", description: "Delivered across web and workflow products" },
 ];
 
 export const skillCategories: SkillCategory[] = [
   {
     title: "Frontend",
     skills: [
-      { name: "HTML", level: 95 },
-      { name: "CSS", level: 92 },
-      { name: "JavaScript", level: 90 },
-      { name: "React", level: 92 },
-      { name: "Next.js", level: 93 },
+      { name: "React.js", level: 92 },
+      { name: "Next.js", level: 94 },
+      { name: "TypeScript", level: 90 },
+      { name: "Tailwind CSS", level: 91 },
+      { name: "JavaScript", level: 89 },
     ],
   },
   {
     title: "Backend",
     skills: [
       { name: "Node.js", level: 88 },
-      { name: "MongoDB", level: 86 },
+      { name: "Express.js", level: 84 },
+      { name: "REST APIs", level: 87 },
+    ],
+  },
+  {
+    title: "Databases",
+    skills: [
+      { name: "Firebase", level: 90 },
+      { name: "MongoDB", level: 87 },
+      { name: "SQL", level: 80 },
+      { name: "Oracle 10g", level: 72 },
+    ],
+  },
+  {
+    title: "AI & Automation",
+    skills: [
+      { name: "OpenAI API", level: 88 },
+      { name: "LangChain", level: 78 },
+      { name: "Hugging Face", level: 76 },
+      { name: "TensorFlow Lite", level: 72 },
     ],
   },
   {
     title: "Tools",
     skills: [
       { name: "Figma", level: 82 },
-      { name: "Git", level: 91 },
-      { name: "WordPress", level: 85 },
+      { name: "Git & GitHub", level: 92 },
+      { name: "WordPress", level: 86 },
+      { name: "VS Code", level: 95 },
     ],
   },
 ];
 
 export const projects: Project[] = [
   {
-    title: "SocialGradeup Agency Platform",
+    title: "Cordito",
     image: "/projects/socialgradeup.svg",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+    techStack: ["Next.js", "TypeScript", "Firebase", "OpenAI API"],
     description:
-      "A premium agency platform with service funnels, analytics-ready pages, and conversion-first UI architecture.",
+      "Workflow automation product with AI-powered summarization and actionable workflow suggestions for faster execution.",
+    liveUrl: "https://cordito.com",
+    githubUrl: "https://cordito.com",
+  },
+  {
+    title: "AI-Powered Student Sync",
+    image: "/projects/ngo-portal.svg",
+    techStack: ["MERN Stack", "Role-based Auth", "AI Analytics"],
+    description:
+      "Role-based student management platform with attendance workflows and AI-driven performance analytics dashboards.",
+    liveUrl: "https://github.com/Nandita2002/Student_Sync",
+    githubUrl: "https://github.com/Nandita2002/Student_Sync",
+  },
+  {
+    title: "Social Gradeup",
+    image: "/projects/student-sync.svg",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "SEO"],
+    description:
+      "SEO-optimized digital agency platform with performance-focused architecture and AI-assisted content generation.",
     liveUrl: "https://socialgradeup.com",
     githubUrl: "https://github.com/Nandita2002/socialgradeup",
   },
   {
-    title: "Hands-on Seva NGO Portal",
-    image: "/projects/ngo-portal.svg",
-    techStack: ["Next.js", "MongoDB", "Tailwind CSS"],
+    title: "Fees Management System",
+    image: "/projects/certificate.svg",
+    techStack: ["React", "Automation", "AI Chatbot"],
     description:
-      "An NGO portal focused on campaigns, volunteer onboarding, and donation storytelling with fast content workflows.",
-    liveUrl: "https://example.com/ngo-portal",
+      "React-based fee management solution with AI chatbot support for inquiries and automated receipt workflows.",
+    liveUrl: "https://github.com/Nandita2002",
+    githubUrl: "https://github.com/Nandita2002",
+  },
+  {
+    title: "Hands-on Seva NGO Portal",
+    image: "/projects/visiting-card.svg",
+    techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
+    description:
+      "Community-focused NGO portal supporting campaigns, volunteer updates, and awareness-driven storytelling.",
+    liveUrl: "https://github.com/Nandita2002/Hands-on-seva-An-NGO",
     githubUrl: "https://github.com/Nandita2002/Hands-on-seva-An-NGO",
   },
   {
-    title: "Student Sync",
-    image: "/projects/student-sync.svg",
-    techStack: ["Next.js", "MongoDB", "Framer Motion"],
-    description:
-      "A student lifecycle dashboard that centralizes attendance, reporting, and operational workflows in one UI.",
-    liveUrl: "https://example.com/student-sync",
-    githubUrl: "https://github.com/Nandita2002/Student_Sync",
-  },
-  {
     title: "Certificate Generator",
-    image: "/projects/certificate.svg",
+    image: "/projects/qr-studio.svg",
     techStack: ["Next.js", "TypeScript", "QR Verification"],
     description:
-      "Certificate generation suite with QR-based verification and export-friendly templates for institutions.",
-    liveUrl: "https://example.com/certificate-generator",
+      "Dynamic certificate generation flow with verification-ready QR support and easy export capabilities.",
+    liveUrl: "https://github.com/Nandita2002/certificate-generator",
     githubUrl: "https://github.com/Nandita2002/certificate-generator",
-  },
-  {
-    title: "Visiting Card Builder",
-    image: "/projects/visiting-card.svg",
-    techStack: ["Next.js", "Tailwind CSS", "UI Animation"],
-    description:
-      "Dynamic visiting card creator with instant previews, polished micro-interactions, and mobile-first controls.",
-    liveUrl: "https://example.com/visiting-card",
-    githubUrl: "https://github.com/Nandita2002/visiting-card-generator",
-  },
-  {
-    title: "QR Studio",
-    image: "/projects/qr-studio.svg",
-    techStack: ["Next.js", "TypeScript", "Design System"],
-    description:
-      "Fast QR generation tool with downloadable outputs and a clean, lightweight interaction layer.",
-    liveUrl: "https://example.com/qr-studio",
-    githubUrl: "https://github.com/Nandita2002/QR-code-generator",
   },
 ];
 
 export const experiences: Experience[] = [
   {
-    role: "Associate Software Developer",
-    company: "Product & Services Team",
-    period: "2022 - Present",
+    role: "Associate Software Developer & Delivery Manager",
+    company: "Cordito",
+    period: "Dec 2024 - Present",
     summary:
-      "Built end-to-end web applications, improved maintainability with reusable architectures, and optimized UX performance.",
+      "Led product delivery using Next.js, TypeScript, and Firebase, integrated AI-powered automation, and improved release cycle efficiency by 20%.",
   },
   {
-    role: "Delivery Manager",
-    company: "Cross-functional Projects",
-    period: "2023 - Present",
+    role: "Web Developer",
+    company: "Novel Sky Technologies",
+    period: "Jun 2024 - Nov 2024",
     summary:
-      "Led project planning, sprint delivery, and stakeholder communication while ensuring high quality and predictable releases.",
+      "Revamped UI/UX and optimized performance, reducing page load time by 15%, while improving SEO outcomes for client websites.",
   },
   {
-    role: "CTO",
-    company: "SocialGradeup Digital Agency",
-    period: "2024 - Present",
+    role: "WordPress Web Developer",
+    company: "Elfinity Technologies",
+    period: "Feb 2024 - Mar 2024",
     summary:
-      "Driving technical direction, scaling engineering systems, and delivering growth-ready products in web, marketing, and SEO domains.",
+      "Customized WordPress themes and plugins to improve responsiveness, navigation, and end-user experience.",
+  },
+  {
+    role: "Web Developer Intern",
+    company: "Acala Design and Tech",
+    period: "Aug 2023 - Oct 2023",
+    summary:
+      "Built responsive client websites with backend integrations while collaborating on implementation and handoff workflows.",
+  },
+  {
+    role: "Campus Ambassador",
+    company: "IIT Bombay",
+    period: "Jul 2021 - Jul 2022",
+    summary:
+      "Promoted events, increased student participation, and received a Platinum Badge for high-impact engagement.",
   },
 ];
 
 export const services: Service[] = [
   {
-    title: "Web Development",
-    description: "Modern, scalable, and conversion-ready websites with premium UX and clean architecture.",
+    title: "Full-Stack Web Development",
+    description: "Scalable web products built with modern React, Next.js, TypeScript, and production-first architecture.",
     icon: "code",
   },
   {
-    title: "Digital Marketing",
-    description: "Data-backed campaigns and landing page systems designed to improve lead quality and visibility.",
-    icon: "megaphone",
+    title: "AI Workflow Automation",
+    description: "AI-powered automations using OpenAI and modern tooling to improve speed, productivity, and delivery quality.",
+    icon: "search",
   },
   {
-    title: "SEO Strategy",
-    description: "Technical and content SEO improvements for stronger search presence and long-term growth.",
-    icon: "search",
+    title: "SEO & Digital Growth",
+    description: "SEO-focused implementation and content workflows designed to improve discoverability and organic traffic.",
+    icon: "megaphone",
   },
 ];
 
 export const socialLinks: SocialLink[] = [
-  { platform: "LinkedIn", href: "https://linkedin.com/in/nandita" },
-  { platform: "GitHub", href: "https://github.com/Nandita2002" },
+  { platform: "LinkedIn", href: profile.linkedin },
+  { platform: "GitHub", href: profile.github },
 ];
 
 export const linkedinFallbackArticles: LinkedInArticle[] = [
   {
-    title: "Designing a Scalable Student Management Platform with Next.js",
-    url: "https://www.linkedin.com/pulse/example-article-1",
-    publishedAt: "2026-01-16",
-    summary:
-      "Architecture decisions, feature ownership patterns, and practical scaling lessons from a real-world student platform.",
+    title: "Doodhwala: Why the Milk & Grocery Delivery Startup Went Sour",
+    url: "https://www.linkedin.com/pulse/doodhwala-why-milk-grocery-delivery-startup-went-sour-mahesh-db8mc",
+    summary: "Startup breakdown and strategic lessons on operations, growth, and product-market sustainability.",
   },
   {
-    title: "How I Build Premium Portfolio Experiences That Convert",
-    url: "https://www.linkedin.com/pulse/example-article-2",
-    publishedAt: "2026-02-06",
-    summary:
-      "A process-driven walkthrough of structure, animation, UX polish, and performance optimization for modern personal brands.",
+    title: "Nickel: The Unsung Hero Powering the Green Revolution",
+    url: "https://www.linkedin.com/pulse/nickel-unsung-hero-powering-the-green-revolution-er-nandita-mahesh-fchmc",
+    summary: "An industry-focused article on sustainability, battery ecosystems, and clean-tech momentum.",
   },
   {
-    title: "From Delivery Manager to CTO: Engineering Execution Framework",
-    url: "https://www.linkedin.com/pulse/example-article-3",
-    publishedAt: "2026-03-08",
+    title: "How an API Gateway Saved My Scattered Services",
+    url: "https://www.linkedin.com/pulse/how-api-gateway-saved-my-scattered-services-nandita-mahesh-wcvnc",
     summary:
-      "My framework for aligning product direction, engineering velocity, and stakeholder communication without losing code quality.",
+      "Technical architecture learnings on service orchestration, reliability, and reducing integration complexity.",
+  },
+  {
+    title: "The Day I Realized API Rate Limits Are Not Just Numbers",
+    url: "https://www.linkedin.com/pulse/day-i-realized-api-rate-limits-just-numbers-nandita-mahesh-azcrc",
+    summary: "A practical engineering narrative on API constraints, resilience strategies, and scalable request design.",
   },
 ];
