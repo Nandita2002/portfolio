@@ -1,0 +1,26 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ngoBg" x1="88" y1="96" x2="1120" y2="730" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ECFDF3" />
+      <stop offset="1" stop-color="#DCFCE7" />
+    </linearGradient>
+    <linearGradient id="ngoCard" x1="280" y1="270" x2="900" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" />
+      <stop offset="1" stop-color="#F0FDF4" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="42" fill="url(#ngoBg)" />
+  <circle cx="1060" cy="120" r="98" fill="#BBF7D0" fill-opacity="0.8" />
+  <circle cx="180" cy="680" r="130" fill="#A7F3D0" fill-opacity="0.75" />
+  <rect x="184" y="148" width="832" height="90" rx="26" fill="#FFFFFF" fill-opacity="0.86" />
+  <rect x="232" y="182" width="220" height="22" rx="11" fill="#BBF7D0" />
+  <rect x="786" y="177" width="178" height="32" rx="16" fill="#22C55E" />
+  <rect x="184" y="270" width="832" height="412" rx="36" fill="url(#ngoCard)" />
+  <rect x="238" y="326" width="248" height="306" rx="26" fill="#F0FDF4" />
+  <rect x="530" y="326" width="430" height="86" rx="22" fill="#DCFCE7" />
+  <rect x="530" y="438" width="430" height="86" rx="22" fill="#D1FAE5" />
+  <rect x="530" y="552" width="430" height="86" rx="22" fill="#BBF7D0" />
+  <path d="M306 466C336 418 398 418 428 466C451 503 451 562 428 598H306C283 562 283 503 306 466Z" fill="#34D399" />
+  <circle cx="367" cy="436" r="36" fill="#10B981" />
+  <rect x="276" y="606" width="182" height="16" rx="8" fill="#A7F3D0" />
+</svg>
