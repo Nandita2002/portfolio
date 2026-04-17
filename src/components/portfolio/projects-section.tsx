@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, FolderGit2 } from "lucide-react";
 
 import { projects } from "@/lib/portfolio-data";
 import { AnimatedSection } from "@/components/portfolio/animated-section";
@@ -77,7 +77,7 @@ export function ProjectsSection() {
                       aria-label={`Open GitHub repository: ${project.title}`}
                       className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white"
                     >
-                      <Github className="h-3.5 w-3.5" />
+                      <FolderGit2 className="h-3.5 w-3.5" />
                       GitHub
                     </a>
                   </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { CheckCircle2, Github, Linkedin, SendHorizonal } from "lucide-react";
+import { CheckCircle2, FolderGit2, SendHorizonal } from "lucide-react";
 
 import { profile, socialLinks } from "@/lib/portfolio-data";
 import { AnimatedSection } from "@/components/portfolio/animated-section";
@@ -163,9 +163,9 @@ export function ContactSection() {
                 >
                   <span>{link.platform}</span>
                   {link.platform === "LinkedIn" ? (
-                    <Linkedin className="h-4 w-4" />
+                    <span className="text-xs font-semibold tracking-wide">in</span>
                   ) : (
-                    <Github className="h-4 w-4" />
+                    <FolderGit2 className="h-4 w-4" />
                   )}
                 </a>
               ))}
