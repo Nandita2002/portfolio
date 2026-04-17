@@ -5,15 +5,14 @@ import { motion } from "framer-motion";
 import { ExternalLink, FolderGit2 } from "lucide-react";
 
 import { projects } from "@/lib/portfolio-data";
-import { AnimatedSection } from "@/components/portfolio/animated-section";
 import { Container } from "@/components/ui/container";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { fadeInUp, smoothTransition, staggerContainer } from "@/styles/animations";
+import { smoothTransition } from "@/styles/animations";
 
 export function ProjectsSection() {
   return (
-    <AnimatedSection id="projects" className="py-16 sm:py-24">
+    <section id="projects" className="py-16 sm:py-24">
       <Container>
         <SectionHeading
           eyebrow="Projects"
@@ -21,15 +20,15 @@ export function ProjectsSection() {
           description="A curated collection of production-style builds with modern stacks, animated interactions, and practical outcomes."
         />
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.16 }}
-          className="grid gap-5 md:grid-cols-2 xl:grid-cols-3"
-        >
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project) => (
-            <motion.article key={project.title} variants={fadeInUp} transition={smoothTransition}>
+            <motion.article
+              key={project.title}
+              initial={false}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={smoothTransition}
+            >
               <GlassCard className="group h-full p-0 transition duration-300 hover:scale-[1.015]">
                 <div className="relative overflow-hidden rounded-t-2xl border-b border-white/70 dark:border-white/10">
                   <Image
@@ -85,8 +84,8 @@ export function ProjectsSection() {
               </GlassCard>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
       </Container>
-    </AnimatedSection>
+    </section>
   );
 }

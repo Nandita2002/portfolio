@@ -15,6 +15,10 @@ type ContactErrors = {
   message?: string;
 };
 
+type ContactApiResponse = {
+  ok: boolean;
+  message?: string;
+};
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -24,7 +28,9 @@ export function ContactSection() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<ContactErrors>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = (): boolean => {
     const nextErrors: ContactErrors = {};
@@ -45,18 +51,47 @@ export function ContactSection() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(false);
+    setSubmitMessage(null);
+    setSubmitError(null);
 
     if (!validate()) {
       return;
     }
 
-    setSubmitted(true);
-    setName("");
-    setEmail("");
-    setMessage("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          source: "portfolio-contact-form",
+        }),
+      });
+
+      const payload = (await response.json()) as ContactApiResponse;
+
+      if (!response.ok || !payload.ok) {
+        setSubmitError(payload.message ?? "Unable to submit your message right now.");
+        return;
+      }
+
+      setSubmitMessage(payload.message ?? "Thanks! Your message has been received.");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setSubmitError("Something went wrong while sending your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -122,18 +157,20 @@ export function ContactSection() {
 
               <button
                 type="submit"
+                disabled={isSubmitting}
                 className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#16a34a] to-[#22c55e] px-5 py-3 text-sm font-semibold text-white shadow-[0_15px_32px_-18px_rgba(22,163,74,0.9)] transition hover:brightness-110"
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
                 <SendHorizonal className="ml-2 h-4 w-4" />
               </button>
 
-              {submitted ? (
+              {submitMessage ? (
                 <p className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 dark:text-emerald-300">
                   <CheckCircle2 className="h-4 w-4" />
-                  Message looks great. I&apos;ll reply shortly.
+                  {submitMessage}
                 </p>
               ) : null}
+              {submitError ? <p className="text-sm font-medium text-rose-600 dark:text-rose-300">{submitError}</p> : null}
             </form>
           </GlassCard>
 
