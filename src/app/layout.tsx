@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import { personSchema, siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,17 +15,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nandita Mahesh",
-  description: "Software Developer | Web Developer | Open Source Enthusiast",
-  keywords: "Nandita Mahesh, Software Engineer, Web Developer, Portfolio",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Nandita Mahesh",
+    "Associate Software Developer",
+    "Delivery Manager",
+    "AI Workflow Automation",
+    "Next.js Portfolio",
+    "Web Developer",
+    "Cordito",
+    "Generative AI",
+    "Full Stack Developer",
+  ],
   openGraph: {
-    title: "Nandita Mahesh - Portfolio",
-    description: "Software Developer | Web Developer | Open Source Enthusiast",
-    url: "https://yourdomain.com",
-    siteName: "Nandita Mahesh",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "https://yourdomain.com/og-image.png",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
       },
@@ -33,10 +49,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nandita Mahesh - Portfolio",
-    description: "Software Developer | Web Developer | Open Source Enthusiast",
-    images: ["https://yourdomain.com/og-image.png"],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  category: "technology",
 };
 
 
@@ -48,8 +68,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-white`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
         {children}
       </body>
     </html>

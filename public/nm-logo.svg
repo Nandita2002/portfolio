@@ -1,0 +1,43 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="nm-bg" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16A34A"/>
+      <stop offset="1" stop-color="#22C55E"/>
+    </linearGradient>
+    <linearGradient id="nm-accent" x1="154" y1="382" x2="358" y2="382" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <radialGradient id="nm-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(380 128) rotate(141.954) scale(272.743)">
+      <stop stop-color="white" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="nm-shadow" x="26" y="32" width="460" height="460" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="14"/>
+      <feGaussianBlur stdDeviation="19"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.027451 0 0 0 0 0.223529 0 0 0 0 0.117647 0 0 0 0.34 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_102_18"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_102_18" result="shape"/>
+    </filter>
+    <filter id="nm-soft" x="92" y="78" width="328" height="328" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="20" result="effect1_foregroundBlur_102_18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#nm-shadow)">
+    <rect x="64" y="64" width="384" height="384" rx="110" fill="url(#nm-bg)"/>
+    <rect x="64.75" y="64.75" width="382.5" height="382.5" rx="109.25" stroke="white" stroke-opacity="0.28" stroke-width="1.5"/>
+    <rect x="89" y="89" width="334" height="334" rx="94" fill="url(#nm-glow)"/>
+    <g filter="url(#nm-soft)">
+      <circle cx="160" cy="152" r="58" fill="#DCFCE7" fill-opacity="0.45"/>
+      <circle cx="342" cy="340" r="54" fill="#86EFAC" fill-opacity="0.35"/>
+    </g>
+    <path d="M110 120C110 103.431 123.431 90 140 90H372C388.569 90 402 103.431 402 120V171C402 187.569 388.569 201 372 201H140C123.431 201 110 187.569 110 171V120Z" fill="white" fill-opacity="0.12"/>
+    <text x="256" y="298" text-anchor="middle" fill="white" font-family="Inter, Poppins, 'Segoe UI', Arial, sans-serif" font-size="178" font-weight="800" letter-spacing="8">NM</text>
+    <rect x="154" y="366" width="204" height="14" rx="7" fill="url(#nm-accent)"/>
+  </g>
+</svg>

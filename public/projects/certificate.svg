@@ -1,0 +1,15 @@
+<svg width="1280" height="840" viewBox="0 0 1280 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="840" rx="48" fill="#F8FAFC"/>
+  <circle cx="1100" cy="120" r="190" fill="#DCFCE7"/>
+  <rect x="120" y="120" width="1040" height="600" rx="34" fill="#FFFFFF"/>
+  <rect x="120" y="120" width="1040" height="14" fill="#22C55E"/>
+  <text x="164" y="206" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="700">Certificate Generator</text>
+  <text x="164" y="258" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="28">Verified credentials with QR-based authenticity</text>
+  <rect x="164" y="316" width="952" height="320" rx="22" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="204" y="392" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="26">Certificate of Completion</text>
+  <text x="204" y="440" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700">Nandita Mahesh</text>
+  <rect x="916" y="360" width="160" height="160" rx="20" fill="#ECFDF5" stroke="#22C55E"/>
+  <path d="M948 424H1044M948 456H1044M948 488H1044M980 392V520M1012 392V520" stroke="#16A34A" stroke-width="8"/>
+  <rect x="164" y="670" width="220" height="36" rx="12" fill="#E0F2FE"/>
+  <text x="192" y="693" fill="#0369A1" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">Next.js " TypeScript</text>
+</svg>
