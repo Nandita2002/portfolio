@@ -44,7 +44,7 @@ export function Navbar() {
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
-          className="rounded-2xl border border-white/70 bg-white/75 px-4 py-3 shadow-[0_20px_40px_-28px_rgba(15,23,42,0.5)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70"
+          className="rounded-2xl border border-white/70 bg-white/75 px-4 py-3 shadow-[0_20px_40px_-28px_rgba(15,23,42,0.5)] backdrop-blur-xl dark:border-white/15 dark:bg-[#081427]/86 dark:shadow-[0_24px_46px_-30px_rgba(2,8,23,0.9)]"
         >
           <div className="flex items-center justify-between gap-4">
             <a
@@ -62,8 +62,8 @@ export function Navbar() {
                   className={cn(
                     "rounded-xl px-3 py-2 text-sm font-medium transition-all duration-300",
                     activeSection === item.href
-                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/18 dark:text-emerald-200"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/75 dark:hover:text-slate-100"
                   )}
                 >
                   {item.label}
@@ -76,7 +76,7 @@ export function Navbar() {
                 type="button"
                 aria-label="Toggle color mode"
                 onClick={toggleTheme}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white/70 text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white/70 text-slate-700 transition hover:bg-slate-100 dark:border-slate-600/70 dark:bg-[#0f1f37]/85 dark:text-slate-200 dark:hover:bg-slate-800/85"
               >
                 {!mounted ? (
                   <span className="h-4 w-4 rounded-full bg-slate-300 dark:bg-slate-600" />
@@ -90,7 +90,7 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setMenuOpen((current) => !current)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white/70 text-slate-700 transition hover:bg-slate-100 md:hidden dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white/70 text-slate-700 transition hover:bg-slate-100 md:hidden dark:border-slate-600/70 dark:bg-[#0f1f37]/85 dark:text-slate-200 dark:hover:bg-slate-800/85"
                 aria-label="Toggle navigation menu"
               >
                 {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -103,7 +103,7 @@ export function Navbar() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="mt-3 grid gap-1 border-t border-slate-200 pt-3 md:hidden dark:border-slate-700"
+              className="mt-3 grid gap-1 border-t border-slate-200 pt-3 md:hidden dark:border-slate-700/80"
             >
               {navItems.map((item) => (
                 <a
@@ -113,8 +113,8 @@ export function Navbar() {
                   className={cn(
                     "rounded-xl px-3 py-2 text-sm font-medium transition",
                     activeSection === item.href
-                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300"
-                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                      ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/18 dark:text-emerald-200"
+                      : "text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800/75"
                   )}
                 >
                   {item.label}

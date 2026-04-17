@@ -54,12 +54,12 @@ export function HeroSection() {
     >
       <div className="pointer-events-none absolute inset-0">
         <motion.div
-          className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-emerald-200/70 blur-3xl dark:bg-emerald-500/20"
+          className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-emerald-200/70 blur-3xl dark:bg-emerald-400/24"
           animate={{ x: [0, 25, -20, 0], y: [0, -18, 10, 0] }}
           transition={{ duration: 18, repeat: Number.POSITIVE_INFINITY }}
         />
         <motion.div
-          className="absolute right-[-120px] bottom-[-120px] h-[380px] w-[380px] rounded-full bg-lime-200/65 blur-3xl dark:bg-lime-500/15"
+          className="absolute right-[-120px] bottom-[-120px] h-[380px] w-[380px] rounded-full bg-lime-200/65 blur-3xl dark:bg-blue-400/16"
           animate={{ x: [0, -30, 15, 0], y: [0, 22, -14, 0] }}
           transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY }}
         />
@@ -70,14 +70,14 @@ export function HeroSection() {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="relative mx-auto grid max-w-6xl gap-6 rounded-2xl border border-white/70 bg-white/70 px-5 py-6 shadow-[0_26px_58px_-34px_rgba(15,23,42,0.3)] backdrop-blur-md lg:grid-cols-[1.08fr_0.92fr] lg:gap-9 lg:px-9 lg:py-8 dark:border-white/10 dark:bg-slate-900/70"
+          className="relative mx-auto grid max-w-6xl gap-6 rounded-2xl border border-white/70 bg-white/70 px-5 py-6 shadow-[0_26px_58px_-34px_rgba(15,23,42,0.3)] backdrop-blur-md lg:grid-cols-[1.08fr_0.92fr] lg:gap-9 lg:px-9 lg:py-8 dark:border-white/15 dark:bg-[#071329]/82 dark:shadow-[0_34px_65px_-38px_rgba(0,0,0,0.92)]"
         >
-          <div className="pointer-events-none absolute top-8 bottom-8 left-[54%] hidden w-px bg-gradient-to-b from-transparent via-emerald-200/70 to-transparent lg:block dark:via-emerald-500/25" />
+          <div className="pointer-events-none absolute top-8 bottom-8 left-[54%] hidden w-px bg-gradient-to-b from-transparent via-emerald-200/70 to-transparent lg:block dark:via-emerald-400/26" />
           <div className="text-center lg:text-left">
             <motion.p
               variants={fadeInUp}
               transition={smoothTransition}
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700 dark:border-emerald-500/35 dark:bg-emerald-500/10 dark:text-emerald-300"
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700 dark:border-emerald-400/40 dark:bg-emerald-400/12 dark:text-emerald-200"
             >
               <Sparkles className="h-3.5 w-3.5" />
               available for impactful products
@@ -86,7 +86,7 @@ export function HeroSection() {
             <motion.h1
               variants={fadeInUp}
               transition={smoothTransition}
-              className="mt-4 text-balance text-3xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-[3.15rem] dark:text-white"
+              className="mt-4 text-balance text-3xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-[3.15rem] dark:text-slate-50"
             >
               {profile.name}
               <span className="block bg-gradient-to-r from-sky-600 to-blue-500 bg-clip-text text-transparent dark:from-sky-300 dark:to-blue-200">
@@ -97,7 +97,7 @@ export function HeroSection() {
             <motion.p
               variants={fadeInUp}
               transition={smoothTransition}
-              className="mx-auto mt-4 max-w-xl text-pretty text-[0.96rem] leading-relaxed text-slate-600 sm:text-lg lg:mx-0 dark:text-slate-300"
+              className="mx-auto mt-4 max-w-xl text-pretty text-[0.96rem] leading-relaxed text-slate-600 sm:text-lg lg:mx-0 dark:text-slate-300/95"
             >
               {profile.tagline}
             </motion.p>
@@ -120,7 +120,7 @@ export function HeroSection() {
             <motion.div
               variants={fadeInUp}
               transition={smoothTransition}
-              className="mt-6 rounded-2xl border border-white/75 bg-white/70 p-3.5 text-left shadow-sm dark:border-white/10 dark:bg-slate-900/65"
+              className="mt-6 rounded-2xl border border-white/75 bg-white/70 p-3.5 text-left shadow-sm dark:border-white/12 dark:bg-[#0b1a33]/72"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
                 Core stack
@@ -129,7 +129,7 @@ export function HeroSection() {
                 {techRail.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-500/13 dark:text-emerald-200"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 dark:bg-emerald-300" />
                     {item}
@@ -142,15 +142,15 @@ export function HeroSection() {
           <motion.div
             variants={fadeInUp}
             transition={smoothTransition}
-            className="relative mx-auto flex h-[300px] w-full max-w-[350px] items-center justify-center rounded-2xl border border-white/75 bg-gradient-to-br from-white to-emerald-50 shadow-[0_18px_48px_-34px_rgba(15,23,42,0.45)] dark:border-white/10 dark:from-slate-900 dark:to-slate-800"
+            className="relative mx-auto flex h-[300px] w-full max-w-[350px] items-center justify-center rounded-2xl border border-white/75 bg-gradient-to-br from-white to-emerald-50 shadow-[0_18px_48px_-34px_rgba(15,23,42,0.45)] dark:border-white/12 dark:from-[#0c1d37] dark:to-[#081427]"
           >
             <motion.div
-              className="absolute inset-6 rounded-full border border-emerald-200/70 dark:border-emerald-500/30"
+              className="absolute inset-6 rounded-full border border-emerald-200/70 dark:border-emerald-400/28"
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 34, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
             />
             <motion.div
-              className="absolute inset-11 rounded-full border border-dashed border-emerald-200/75 dark:border-emerald-500/35"
+              className="absolute inset-11 rounded-full border border-dashed border-emerald-200/75 dark:border-emerald-300/26"
               animate={{ rotate: [360, 0] }}
               transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
             />
@@ -168,14 +168,14 @@ export function HeroSection() {
                   y1="50"
                   x2={tech.x}
                   y2={tech.y}
-                  stroke="rgb(16 185 129 / 0.33)"
+                  stroke="rgb(52 211 153 / 0.3)"
                   strokeWidth="0.55"
                 />
               ))}
             </svg>
 
             <motion.div
-              className="relative z-10 flex h-24 w-24 items-center justify-center rounded-2xl border border-emerald-200 bg-white shadow-md dark:border-emerald-500/30 dark:bg-slate-950"
+              className="relative z-10 flex h-24 w-24 items-center justify-center rounded-2xl border border-emerald-200 bg-white shadow-md dark:border-emerald-400/30 dark:bg-[#091225]"
               animate={{ y: [0, -4, 0], scale: [1, 1.02, 1] }}
               transition={{ duration: 6.5, repeat: Number.POSITIVE_INFINITY }}
             >
@@ -185,7 +185,7 @@ export function HeroSection() {
             {technologies.map((tech) => (
               <motion.div
                 key={tech.name}
-                className="absolute z-20 rounded-2xl border border-white/80 bg-white/85 p-3 shadow-[0_16px_28px_-18px_rgba(15,23,42,0.45)] dark:border-white/10 dark:bg-slate-900/85"
+                className="absolute z-20 rounded-2xl border border-white/80 bg-white/85 p-3 shadow-[0_16px_28px_-18px_rgba(15,23,42,0.45)] dark:border-white/12 dark:bg-[#0b1a33]/85"
                 style={{ left: `${tech.x}%`, top: `${tech.y}%`, transform: "translate(-50%, -50%)" }}
                 animate={{
                   y: [0, -8, 0],
