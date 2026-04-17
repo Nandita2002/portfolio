@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, CalendarDays, Linkedin } from "lucide-react";
+import { ArrowUpRight, CalendarDays } from "lucide-react";
 
 import type { LinkedInArticle } from "@/lib/types";
 import { AnimatedSection } from "@/components/portfolio/animated-section";
@@ -56,7 +56,7 @@ export function BlogSection({ articles }: BlogSectionProps) {
                 <GlassCard className="flex h-full flex-col justify-between">
                   <div>
                     <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 dark:border-blue-400/30 dark:bg-blue-500/12 dark:text-blue-200">
-                      <Linkedin className="h-3.5 w-3.5" />
+                      <span className="text-[11px] font-bold leading-none">in</span>
                       LinkedIn Article
                     </div>
 
