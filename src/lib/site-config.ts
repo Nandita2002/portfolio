@@ -16,6 +16,6 @@ export const personSchema = {
     "@type": "Organization",
     name: "Cordito",
   },
-  sameAs: ["https://www.linkedin.com/in/nandita-mahesh", "https://github.com/Nandita2002"],
+  sameAs: ["https://www.linkedin.com/in/nanditamahesh/", "https://github.com/Nandita2002"],
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://nanditamahesh.dev",
 };

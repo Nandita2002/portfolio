@@ -18,7 +18,7 @@ export const profile = {
   location: "Bangalore, Karnataka, India",
   email: "nanditam2029@gmail.com",
   phone: "+91 6361589943",
-  linkedin: "https://www.linkedin.com/in/nandita-mahesh",
+  linkedin: "https://www.linkedin.com/in/nanditamahesh/",
   github: "https://github.com/Nandita2002",
   summary:
     "Associate Software Developer and Delivery Manager with hands-on experience in full-stack and AI-driven development. Skilled in Next.js, React.js, TypeScript, Firebase, MongoDB, and AI tools such as OpenAI APIs, LangChain, Hugging Face, and TensorFlow Lite. Currently pursuing an MBA in Business Intelligence and Analytics.",
