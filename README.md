@@ -30,7 +30,6 @@ CONTACT_STORAGE_PATH=./data/contact-submissions.json
 ```
 
 The API validates name/email/message before saving each submission.
-
 ## Getting Started
 
 First, run the development server:
