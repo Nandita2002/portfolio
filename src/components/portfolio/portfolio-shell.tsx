@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { AboutSection } from "@/components/portfolio/about-section";
+import { BlogSection } from "@/components/portfolio/blog-section";
 import { ContactSection } from "@/components/portfolio/contact-section";
 import { ExperienceSection } from "@/components/portfolio/experience-section";
 import { HeroSection } from "@/components/portfolio/hero-section";
@@ -13,8 +14,13 @@ import { ProjectsSection } from "@/components/portfolio/projects-section";
 import { ServicesSection } from "@/components/portfolio/services-section";
 import { SiteFooter } from "@/components/portfolio/site-footer";
 import { SkillsSection } from "@/components/portfolio/skills-section";
+import type { LinkedInArticle } from "@/lib/types";
 
-export function PortfolioShell() {
+type PortfolioShellProps = {
+  linkedinArticles: LinkedInArticle[];
+};
+
+export function PortfolioShell({ linkedinArticles }: PortfolioShellProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -37,6 +43,7 @@ export function PortfolioShell() {
           <ProjectsSection />
           <ExperienceSection />
           <ServicesSection />
+          <BlogSection articles={linkedinArticles} />
           <ContactSection />
         </main>
         <SiteFooter />

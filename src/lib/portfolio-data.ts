@@ -1,5 +1,6 @@
 import type {
   Experience,
+  LinkedInArticle,
   NavItem,
   Project,
   Service,
@@ -27,6 +28,7 @@ export const navItems: NavItem[] = [
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Services", href: "#services" },
+  { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -166,4 +168,28 @@ export const services: Service[] = [
 export const socialLinks: SocialLink[] = [
   { platform: "LinkedIn", href: "https://linkedin.com/in/nandita" },
   { platform: "GitHub", href: "https://github.com/Nandita2002" },
+];
+
+export const linkedinFallbackArticles: LinkedInArticle[] = [
+  {
+    title: "Designing a Scalable Student Management Platform with Next.js",
+    url: "https://www.linkedin.com/pulse/example-article-1",
+    publishedAt: "2026-01-16",
+    summary:
+      "Architecture decisions, feature ownership patterns, and practical scaling lessons from a real-world student platform.",
+  },
+  {
+    title: "How I Build Premium Portfolio Experiences That Convert",
+    url: "https://www.linkedin.com/pulse/example-article-2",
+    publishedAt: "2026-02-06",
+    summary:
+      "A process-driven walkthrough of structure, animation, UX polish, and performance optimization for modern personal brands.",
+  },
+  {
+    title: "From Delivery Manager to CTO: Engineering Execution Framework",
+    url: "https://www.linkedin.com/pulse/example-article-3",
+    publishedAt: "2026-03-08",
+    summary:
+      "My framework for aligning product direction, engineering velocity, and stakeholder communication without losing code quality.",
+  },
 ];

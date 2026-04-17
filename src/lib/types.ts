@@ -45,3 +45,10 @@ export type SocialLink = {
   platform: string;
   href: string;
 };
+
+export type LinkedInArticle = {
+  title: string;
+  url: string;
+  publishedAt?: string;
+  summary?: string;
+};

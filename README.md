@@ -1,5 +1,18 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## LinkedIn Blog Section (Auto-latest)
+
+This portfolio includes a **Blog** section that can automatically display your latest LinkedIn articles.
+
+1. Add your LinkedIn RSS/Atom feed URL in `.env.local`:
+
+```bash
+LINKEDIN_ARTICLES_FEED_URL=https://your-feed-url.xml
+```
+
+2. If feed data is unavailable, fallback links from `src/lib/portfolio-data.ts` are shown.
+3. When you publish a new LinkedIn article and your feed updates, the site will show it automatically (revalidated periodically on the server).
+
 ## Getting Started
 
 First, run the development server:
